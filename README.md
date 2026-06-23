@@ -38,6 +38,20 @@ Git workflow automation.
 | `smart-commit` | `/git-workflow:smart-commit` | Stage and commit with an auto-generated conventional commit message |
 | `pr-summary` | `/git-workflow:pr-summary` | Write a pull request description from the current branch diff |
 
+### `jmir-copyediting`
+
+Comprehensive copyediting for JMIR Publications manuscripts.
+
+| Skill | Invocation | Description |
+|---|---|---|
+| `jmir-copyediting` | `/jmir-copyediting:jmir-copyediting` | Full JMIR/AMA-style copyedit with two-layer workflow (deterministic script + judgement), supporting files, and interactive HTML review report |
+
+Supporting files loaded on demand: `house-style.md`, `abbreviations.md`, `statistics.md`, `tables-and-figures.md`, `references.md`, `routine-checks.md`, `query-bank.md`.
+
+Scripts: `scripts/mechanical_edits.py` (deterministic scanner/fixer), `scripts/report.py` (interactive HTML review report).
+
+---
+
 ### `code-quality`
 
 Code review and quality checks.

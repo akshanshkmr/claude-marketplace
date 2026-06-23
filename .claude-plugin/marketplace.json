@@ -29,6 +29,16 @@
       },
       "category": "code-review",
       "tags": ["review", "quality", "best-practices"]
+    },
+    {
+      "name": "jmir-copyediting",
+      "source": "./plugins/jmir-copyediting",
+      "description": "Comprehensive JMIR Publications copyediting skill covering house style, AMA style, statistics, tables, figures, references, and abbreviations with deterministic find/replace scripts and an interactive HTML review report",
+      "author": {
+        "name": "akshanshkmr"
+      },
+      "category": "writing",
+      "tags": ["copyediting", "jmir", "academic", "ama-style", "scholarly"]
     }
   ]
 }

@@ -1,0 +1,11 @@
+{
+  "name": "jmir-copyediting",
+  "description": "Comprehensive JMIR Publications copyediting skill covering house style, AMA style, statistics, tables, figures, references, and abbreviations with deterministic find/replace scripts and an interactive HTML review report",
+  "version": "1.0.0",
+  "author": {
+    "name": "akshanshkmr"
+  },
+  "homepage": "https://github.com/akshanshkmr/claude-marketplace",
+  "repository": "https://github.com/akshanshkmr/claude-marketplace",
+  "license": "MIT"
+}

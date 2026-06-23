@@ -881,6 +881,114 @@ _SCRIPT = """
   });
   refreshProg();
 })();
+
+(function(){
+  var paper=document.getElementById('paper'); if(!paper) return;
+  var store=null; try{ store=window.localStorage; }catch(e){ store=null; }
+  var KEY=window.__MSID__||'jmir';
+  function load(k,d){ try{ var v=store&&store.getItem(KEY+':'+k); return v==null?d:JSON.parse(v);}catch(e){return d;} }
+  function save(k,v){ try{ store&&store.setItem(KEY+':'+k, JSON.stringify(v)); }catch(e){} }
+  function esc(s){ return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function closest(node,sel){ var el=node&&node.nodeType===1?node:(node&&node.parentElement); return el?el.closest(sel):null; }
+
+  var items=load('feedback',[]);  // key: ':feedback'
+  var pill=document.getElementById('fb-pill');
+  var pop=document.getElementById('fb-popover');
+  var listEl=document.getElementById('fbList');
+  var countEl=document.getElementById('fbCount');
+  var savedRange=null, savedCtx=null, chosenCat='missed-edit';
+  var CAT={'missed-edit':'missed edit','wrong-edit':'wrong edit','better-suggestion':'better suggestion','general-note':'general note'};
+
+  function ctxFor(range){
+    var sel=range.toString();
+    var p=closest(range.startContainer,'[data-pidx]');
+    var info={selectedText:sel, paraIndex:p?+p.dataset.pidx:-1, section:p?(p.dataset.section||''):'', context:sel, linkedEdit:null};
+    if(p){ var t=p.textContent||''; var i=t.indexOf(sel); if(i>=0){ info.context=t.slice(Math.max(0,i-120), i+sel.length+120); } }
+    var eb=closest(range.startContainer,'.edit-block');
+    if(eb){ var del=eb.querySelector('.diff-del'), ins=eb.querySelector('.diff-ins');
+      info.linkedEdit={eid:eb.dataset.eid||'', ruleId:eb.dataset.ruleId||'', tagType:eb.dataset.tagType||'',
+        original:del?del.textContent:'', suggestion:ins?ins.textContent:'', mode:eb.dataset.mode||''}; }
+    return info;
+  }
+  function hidePill(){ pill.style.display='none'; }
+  function showPill(range){
+    var rs=range.getClientRects(), r=rs[rs.length-1]; if(!r){ hidePill(); return; }
+    pill.style.display='block';
+    pill.style.top=(window.scrollY+r.bottom+6)+'px';
+    pill.style.left=(window.scrollX+r.left)+'px';
+  }
+
+  document.addEventListener('mouseup', function(){
+    setTimeout(function(){
+      if(pop.style.display==='block') return;
+      var s=window.getSelection();
+      if(!s||s.isCollapsed||!s.toString().trim()){ hidePill(); return; }
+      var range=s.getRangeAt(0);
+      if(!paper.contains(range.commonAncestorContainer)){ hidePill(); return; }
+      savedRange=range; showPill(range);
+    },1);
+  });
+  pill.addEventListener('mousedown', function(e){ e.preventDefault(); });
+  pill.addEventListener('click', function(){ if(!savedRange) return; savedCtx=ctxFor(savedRange); openPop(); });
+
+  function openPop(){
+    hidePill();
+    document.getElementById('fb-snippet').textContent=savedCtx.selectedText;
+    document.getElementById('fb-repl').value='';
+    document.getElementById('fb-note').value='';
+    chosenCat='missed-edit';
+    pop.querySelectorAll('.fb-cat').forEach(function(b){ b.classList.toggle('on', b.dataset.cat==='missed-edit'); });
+    var rs=savedRange.getClientRects(), r=rs[rs.length-1];
+    var top=(r?window.scrollY+r.bottom+6:window.scrollY+80);
+    var left=(r?window.scrollX+r.left:40);
+    var maxLeft=window.scrollX+document.documentElement.clientWidth-360;
+    pop.style.display='block';
+    pop.style.top=top+'px'; pop.style.left=Math.max(8,Math.min(left,maxLeft))+'px';
+    document.getElementById('fb-note').focus();
+  }
+  function closePop(){ pop.style.display='none'; }
+
+  pop.querySelectorAll('.fb-cat').forEach(function(b){
+    b.addEventListener('click', function(){ chosenCat=b.dataset.cat;
+      pop.querySelectorAll('.fb-cat').forEach(function(x){ x.classList.toggle('on', x===b); }); });
+  });
+  document.getElementById('fb-cancel').addEventListener('click', closePop);
+  document.getElementById('fb-save').addEventListener('click', function(){
+    var item={ id:'fb-'+Date.now()+'-'+Math.random().toString(36).slice(2,5),
+      category:chosenCat, selectedText:savedCtx.selectedText, paraIndex:savedCtx.paraIndex,
+      section:savedCtx.section, context:savedCtx.context, linkedEdit:savedCtx.linkedEdit,
+      suggestedReplacement:document.getElementById('fb-repl').value.trim(),
+      note:document.getElementById('fb-note').value.trim(), created:new Date().toISOString() };
+    items.push(item); save('feedback',items); renderList(); closePop();
+    var s=window.getSelection(); if(s) s.removeAllRanges();
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closePop(); hidePill(); } });
+
+  function renderList(){
+    if(countEl) countEl.textContent=items.length;
+    if(!listEl) return;
+    if(!items.length){ listEl.innerHTML='<p class="empty">No feedback yet — select text in the manuscript to add some.</p>'; return; }
+    listEl.innerHTML=items.map(function(it){
+      var repl=it.suggestedReplacement?'<p class="fb-repl-line">&rarr; '+esc(it.suggestedReplacement)+'</p>':'';
+      var note=it.note?'<p class="fb-note-line">'+esc(it.note)+'</p>':'';
+      return '<div class="fb-item fbc-'+it.category+'" data-id="'+it.id+'" data-pidx="'+it.paraIndex+'">'
+        +'<div class="fb-head"><span class="chip">'+CAT[it.category]+'</span>'
+        +'<button class="fb-del" title="Delete">Delete</button></div>'
+        +'<p class="fb-snip">\\u201c'+esc(it.selectedText)+'\\u201d</p>'+repl+note+'</div>';
+    }).join('');
+  }
+  listEl.addEventListener('click', function(e){
+    var item=e.target.closest('.fb-item'); if(!item) return;
+    if(e.target.closest('.fb-del')){
+      items=items.filter(function(x){ return x.id!==item.dataset.id; }); save('feedback',items); renderList(); return;
+    }
+    var p=document.querySelector('[data-pidx="'+item.dataset.pidx+'"]');
+    if(p){ p.classList.remove('flash'); void p.offsetWidth; p.classList.add('flash'); p.scrollIntoView({behavior:'smooth',block:'center'}); }
+  });
+
+  window.__FEEDBACK_GET__=function(){ return items.slice(); };
+  renderList();
+})();
 """
 
 

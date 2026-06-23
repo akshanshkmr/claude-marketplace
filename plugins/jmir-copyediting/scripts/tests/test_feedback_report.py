@@ -48,6 +48,14 @@ def test_pill_and_popover_markup():
         assert el in h, f"{el} missing"
 
 
+def test_capture_js_present():
+    h = gen()
+    assert "window.__FEEDBACK_GET__" in h, "feedback getter not exposed"
+    assert "':feedback'" in h or '":feedback"' in h or ":feedback" in h, \
+        "feedback storage key not used"
+    assert "getSelection" in h, "selection capture not wired"
+
+
 def main():
     failures = 0
     for name, fn in sorted(globals().items()):

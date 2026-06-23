@@ -628,7 +628,7 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border:0;border-radiu
 }
 .edit-block.is-query .diff-ins{display:none}
 .edit-block:hover{background:rgba(99,102,241,.10)}
-.edit-block.flash{animation:flash 1.1s ease}
+.edit-block.flash,.flash{animation:flash 1.1s ease}
 @keyframes flash{0%,100%{background:transparent}25%{background:#fff3bf}}
 
 /* family accents on the auto insertion underline */
@@ -991,7 +991,8 @@ _SCRIPT = """
     if(e.target.closest('.fb-del')){
       items=items.filter(function(x){ return x.id!==item.dataset.id; }); save('feedback',items); renderList(); return;
     }
-    var p=document.querySelector('[data-pidx="'+item.dataset.pidx+'"]');
+    if(item.dataset.pidx==='-1') return;
+    var p=paper.querySelector('[data-pidx="'+item.dataset.pidx+'"]');
     if(p){ p.classList.remove('flash'); void p.offsetWidth; p.classList.add('flash'); p.scrollIntoView({behavior:'smooth',block:'center'}); }
   });
 

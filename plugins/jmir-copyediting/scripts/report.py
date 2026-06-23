@@ -340,6 +340,13 @@ def render_html(title: str, source_name: str, blocks: list[tuple[str, str, list[
     n_auto = sum(1 for e in flat if e["mode"] == "auto")
     n_query = len(queries)
 
+    summary = {
+        "autoApplied": n_auto,
+        "queries": n_query,
+        "queryList": [f"Q{i}: {_query_text(g)}"
+                      for i, g in enumerate(sorted(queries, key=lambda x: x["fam"]), 1)],
+    }
+
     # sidebar: queries
     q_items = []
     for i, g in enumerate(sorted(queries, key=lambda x: x["fam"]), 1):
@@ -396,10 +403,16 @@ def render_html(title: str, source_name: str, blocks: list[tuple[str, str, list[
         + '      <section class="side-sec" data-pane="rules" hidden>\n'
         + (("".join(r_items)) or '<p class="empty">No mechanical edits were needed.</p>')
         + "\n      </section>\n"
+        + '      <section class="side-sec" data-pane="feedback" hidden>\n'
+        + '        <div id="fbList"></div>\n'
+        + "      </section>\n"
         + "    </div>\n  </aside>\n</div>\n"
         + '<div class="toast" id="toast"></div>\n'
         + "<script>\nwindow.__INSIGHTS__ = " + json.dumps(insights) + ";\n"
         + "window.__MSID__ = " + json.dumps("jmir-" + re.sub(r"\W+", "-", title.lower())[:48]) + ";\n"
+        + "window.__SUMMARY__ = " + json.dumps(summary) + ";\n"
+        + "window.__TITLE__ = " + json.dumps(title) + ";\n"
+        + "window.__SOURCE__ = " + json.dumps(source_name) + ";\n"
         + _SCRIPT + "\n</script>\n</body>\n</html>\n"
     )
     return doc
@@ -447,6 +460,8 @@ def _sidebar_header(n_auto, n_query) -> str:
         '      <div class="side-tabs">\n'
         '        <button class="st-btn is-on" data-pane="queries">Queries</button>\n'
         '        <button class="st-btn" data-pane="rules">Rules applied</button>\n'
+        '        <button class="st-btn" data-pane="feedback">Feedback '
+        '<span class="st-count" id="fbCount">0</span></button>\n'
         '      </div>\n'
         '    </div>\n'
     )
@@ -683,6 +698,25 @@ body[data-view="final"] .edit-block.is-query .diff-del{color:inherit; background
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important; animation:none!important}
 }
+
+/* ── feedback (sidebar) ─────────────────────────────────── */
+.st-count{display:inline-block; min-width:16px; padding:0 5px; margin-left:4px;
+  font:600 10px var(--ui-font); color:var(--ui-dim); background:var(--panel-2);
+  border:1px solid var(--line); border-radius:99px}
+.fb-item{position:relative; background:var(--panel); border:1px solid var(--line);
+  border-left:3px solid var(--fam-query); border-radius:11px; padding:11px 12px; margin-bottom:10px}
+.fbc-missed-edit{border-left-color:var(--fam-stat)}
+.fbc-wrong-edit{border-left-color:var(--del)}
+.fbc-better-suggestion{border-left-color:var(--fam-style)}
+.fbc-general-note{border-left-color:var(--fam-query)}
+.fb-head{display:flex; align-items:center; gap:8px; margin-bottom:6px}
+.fb-del{margin-left:auto; background:transparent; border:1px solid var(--line-2);
+  border-radius:7px; color:var(--ui-faint); cursor:pointer; padding:3px 7px; font-size:12px}
+.fb-del:hover{color:var(--del); border-color:var(--del)}
+.fb-snip{margin:0; font:400 13px var(--ser); color:var(--ui); line-height:1.5}
+.fb-repl-line{margin:5px 0 0; font:600 12px var(--ui-font); color:var(--ins)}
+.fb-note-line{margin:5px 0 0; font-size:12.5px; color:var(--ui-dim); line-height:1.5}
+.fb-item{cursor:pointer}
 </style>
 """
 

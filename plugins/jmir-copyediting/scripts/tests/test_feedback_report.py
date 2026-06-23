@@ -24,6 +24,20 @@ def test_rule_id_on_edit_spans():
     assert "data-rule-id=" in h, "edit spans must carry data-rule-id"
 
 
+def test_feedback_tab_and_pane():
+    h = gen()
+    assert 'data-pane="feedback"' in h, "feedback sidebar pane missing"
+    assert 'id="fbList"' in h, "feedback list container missing"
+    assert 'id="fbCount"' in h, "feedback count badge missing"
+
+
+def test_summary_globals():
+    h = gen()
+    assert "window.__SUMMARY__" in h, "structured summary global missing"
+    assert "window.__TITLE__" in h, "title global missing"
+    assert "window.__SOURCE__" in h, "source global missing"
+
+
 def main():
     failures = 0
     for name, fn in sorted(globals().items()):

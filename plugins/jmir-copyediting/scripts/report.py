@@ -231,6 +231,7 @@ def _render_edit_span(e: dict, eid: str) -> str:
     attrs = (
         f'class="{klass}" data-eid="{eid}" data-edited="true" '
         f'data-diff="{diff_kind}" data-tag-type="{_esc(e["tag_type"])}" '
+        f'data-rule-id="{_esc(e.get("rule_id", ""))}" '
         f'data-mode="{e["mode"]}" data-track-detail="{_esc(detail)}" tabindex="0"'
     )
     del_html = f'<span class="diff-del">{_esc(e["original"])}</span>'
@@ -239,9 +240,10 @@ def _render_edit_span(e: dict, eid: str) -> str:
     return f'<span {attrs}>{del_html}{ins_html}{marker}</span>'
 
 
-def _render_paragraph(text: str, edits: list[dict], cls: str, counter: list[int]) -> str:
+def _render_paragraph(text: str, edits: list[dict], cls: str, counter: list[int],
+                      pidx: int, section: str) -> str:
+    anchor = f' data-pidx="{pidx}" data-section="{_esc(section)}"'
     if cls == "author":
-        # wrap each comma/semicolon/and-separated author in jrnlAuthor
         parts = re.split(r"(\s*[,;]\s*|\s+and\s+)", text)
         out = []
         for part in parts:
@@ -251,7 +253,7 @@ def _render_paragraph(text: str, edits: list[dict], cls: str, counter: list[int]
                 out.append(_esc(part))
             elif part.strip():
                 out.append(f'<span class="jrnlAuthor">{_esc(part)}</span>')
-        return '<p class="ms-authors">' + "".join(out) + "</p>"
+        return f'<p class="ms-authors"{anchor}>' + "".join(out) + "</p>"
 
     pieces, cursor = [], 0
     for e in edits:
@@ -263,18 +265,17 @@ def _render_paragraph(text: str, edits: list[dict], cls: str, counter: list[int]
     inner = "".join(pieces)
 
     if cls == "title":
-        return f'<h1 class="jrnlArticleTitle">{inner}</h1>'
+        return f'<h1 class="jrnlArticleTitle"{anchor}>{inner}</h1>'
     if cls == "heading":
-        return f'<h2 class="jrnlSectionHead">{inner}</h2>'
+        return f'<h2 class="jrnlSectionHead"{anchor}>{inner}</h2>'
     if cls == "affil":
-        return f'<p class="jrnlAffil">{inner}</p>'
+        return f'<p class="jrnlAffil"{anchor}>{inner}</p>'
     if cls == "corr":
-        return f'<p class="jrnlCorr">{inner}</p>'
-    # body: bold a leading structured-abstract label if present
+        return f'<p class="jrnlCorr"{anchor}>{inner}</p>'
     m = _SUBLABEL_RE.match(text)
     if m:
         inner = re.sub(r"^([^:]+:)", r'<span class="jrnlSubhead">\1</span>', inner, count=1)
-    return f'<p class="ms-body">{inner}</p>'
+    return f'<p class="ms-body"{anchor}>{inner}</p>'
 
 
 def _build_queries_and_rules(all_edits: list[dict]):
@@ -314,16 +315,16 @@ def _query_text(g: dict) -> str:
     return f'We have changed "{o}" to "{s}" ({g["note"]}). Please confirm this preserves your intended meaning.'
 
 
-def render_html(title: str, source_name: str, blocks: list[tuple[str, str, list[dict]]]) -> str:
+def render_html(title: str, source_name: str, blocks: list[tuple[str, str, list[dict], int, str]]) -> str:
     counter = [0]
     body_html_parts = []
-    for cls, text, edits in blocks:
-        body_html_parts.append(_render_paragraph(text, edits, cls, counter))
+    for cls, text, edits, pidx, section in blocks:
+        body_html_parts.append(_render_paragraph(text, edits, cls, counter, pidx, section))
 
     # re-walk to attach eids to the flat edit list for sidebar grouping
     flat: list[dict] = []
     cid = 0
-    for _cls, _text, edits in blocks:
+    for _cls, _text, edits, _pidx, _section in blocks:
         # account for author paragraphs producing no edit ids
         if _cls == "author":
             continue
@@ -816,7 +817,7 @@ def build(manuscript: Path, edits_file: Path | None, title: str | None) -> str:
             extra_by_para.setdefault(int(e.get("para_index", -1)), []).append(e)
 
     section = "(start)"
-    blocks: list[tuple[str, str, list[dict]]] = []
+    blocks: list[tuple[str, str, list[dict], int, str]] = []
     for i, para in enumerate(paragraphs):
         if not para.strip():
             continue
@@ -825,12 +826,12 @@ def build(manuscript: Path, edits_file: Path | None, title: str | None) -> str:
             section = s
         cls = _classify(para, i, title_idx)
         if cls == "author":
-            blocks.append((cls, para, []))     # authors carry no inline edits
+            blocks.append((cls, para, [], i, section))   # authors carry no inline edits
             continue
         edits = _mechanical_edits_for(para, section)
         edits = _merge_judgement(para, edits, extra_by_para.get(i, []))
         edits = _dedupe_overlaps(edits)
-        blocks.append((cls, para, edits))
+        blocks.append((cls, para, edits, i, section))
 
     return render_html(resolved_title, manuscript.name, blocks)
 

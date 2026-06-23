@@ -1,0 +1,15 @@
+A Smartphone Application for Behavioural Self-Monitoring: Randomized Controlled Trial
+
+Jane A Smith, PhD; Robert B Jones, MSc
+
+Abstract
+
+Background: Many subjects suffer from poor access to care, and prior to this trial few studies analysed the behaviour of users.
+
+Methods
+
+We analysed adherence. Effect sizes were moderate (Cohen's d=0.45). Mean BMI was 27.4 kg.m-2.
+
+Results
+
+The application reduced symptoms (P=0.032). Costs averaged $45 per participant.

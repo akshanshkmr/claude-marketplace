@@ -38,6 +38,16 @@ def test_summary_globals():
     assert "window.__SOURCE__" in h, "source global missing"
 
 
+def test_pill_and_popover_markup():
+    h = gen()
+    assert 'id="fb-pill"' in h, "feedback pill missing"
+    assert 'id="fb-popover"' in h, "feedback popover missing"
+    for cat in ("missed-edit", "wrong-edit", "better-suggestion", "general-note"):
+        assert f'data-cat="{cat}"' in h, f"category button {cat} missing"
+    for el in ('id="fb-repl"', 'id="fb-note"', 'id="fb-save"', 'id="fb-cancel"', 'id="fb-snippet"'):
+        assert el in h, f"{el} missing"
+
+
 def main():
     failures = 0
     for name, fn in sorted(globals().items()):

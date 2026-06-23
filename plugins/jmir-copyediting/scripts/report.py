@@ -315,6 +315,33 @@ def _query_text(g: dict) -> str:
     return f'We have changed "{o}" to "{s}" ({g["note"]}). Please confirm this preserves your intended meaning.'
 
 
+def _fb_popover_html() -> str:
+    cats = [
+        ("missed-edit", "Missed edit"),
+        ("wrong-edit", "Wrong edit"),
+        ("better-suggestion", "Better suggestion"),
+        ("general-note", "General note"),
+    ]
+    cat_btns = "".join(
+        f'<button class="fb-cat" data-cat="{slug}">{label}</button>'
+        for slug, label in cats
+    )
+    return (
+        '<div class="fb-popover" id="fb-popover">\n'
+        '  <div class="fb-pop-head">Add editor feedback</div>\n'
+        '  <p class="fb-snippet" id="fb-snippet"></p>\n'
+        f'  <div class="fb-cats">{cat_btns}</div>\n'
+        '  <input class="fb-input" id="fb-repl" type="text" '
+        'placeholder="Suggested replacement (optional)">\n'
+        '  <textarea class="fb-textarea" id="fb-note" rows="3" '
+        'placeholder="What was missed or wrong?"></textarea>\n'
+        '  <div class="fb-actions">'
+        '<button class="fb-btn-cancel" id="fb-cancel">Cancel</button>'
+        '<button class="fb-btn-save" id="fb-save">Save</button></div>\n'
+        '</div>\n'
+    )
+
+
 def render_html(title: str, source_name: str, blocks: list[tuple[str, str, list[dict], int, str]]) -> str:
     counter = [0]
     body_html_parts = []
@@ -408,6 +435,8 @@ def render_html(title: str, source_name: str, blocks: list[tuple[str, str, list[
         + "      </section>\n"
         + "    </div>\n  </aside>\n</div>\n"
         + '<div class="toast" id="toast"></div>\n'
+        + '<button class="fb-pill" id="fb-pill">+ Add feedback</button>\n'
+        + _fb_popover_html()
         + "<script>\nwindow.__INSIGHTS__ = " + json.dumps(insights) + ";\n"
         + "window.__MSID__ = " + json.dumps("jmir-" + re.sub(r"\W+", "-", title.lower())[:48]) + ";\n"
         + "window.__SUMMARY__ = " + json.dumps(summary) + ";\n"
@@ -717,6 +746,28 @@ body[data-view="final"] .edit-block.is-query .diff-del{color:inherit; background
 .fb-repl-line{margin:5px 0 0; font:600 12px var(--ui-font); color:var(--ins)}
 .fb-note-line{margin:5px 0 0; font-size:12.5px; color:var(--ui-dim); line-height:1.5}
 .fb-item{cursor:pointer}
+/* ── feedback (pill + popover) ──────────────────────────────── */
+.fb-pill{position:absolute; z-index:60; display:none; font:600 12px var(--disp);
+  color:#fff; background:linear-gradient(135deg,#3b82f6,#6366f1); border:0;
+  border-radius:8px; padding:6px 11px; cursor:pointer; box-shadow:0 6px 18px -6px rgba(59,130,246,.8)}
+.fb-popover{position:absolute; z-index:61; display:none; width:340px; padding:14px;
+  background:var(--panel); border:1px solid var(--line-2); border-radius:13px;
+  box-shadow:0 24px 60px -18px rgba(0,0,0,.75)}
+.fb-pop-head{font:700 13px var(--disp); color:#fff; margin-bottom:8px}
+.fb-snippet{margin:0 0 10px; font:400 12.5px var(--ser); color:var(--ui-dim);
+  max-height:54px; overflow:auto; padding-left:9px; border-left:2px solid var(--line-2)}
+.fb-cats{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px}
+.fb-cat{font:600 11px var(--ui-font); color:var(--ui-dim); background:var(--panel-2);
+  border:1px solid var(--line); border-radius:99px; padding:5px 10px; cursor:pointer}
+.fb-cat.on{color:#fff; border-color:#3b82f6; background:#243049}
+.fb-input,.fb-textarea{width:100%; margin-bottom:9px; padding:8px 10px; color:var(--ui);
+  background:var(--bg-2); border:1px solid var(--line-2); border-radius:8px;
+  font:400 13px var(--ui-font); resize:vertical}
+.fb-input:focus,.fb-textarea:focus{outline:none; border-color:#3b82f6}
+.fb-actions{display:flex; justify-content:flex-end; gap:8px}
+.fb-btn-cancel,.fb-btn-save{font:600 12px var(--disp); border-radius:8px; padding:7px 14px; cursor:pointer}
+.fb-btn-cancel{color:var(--ui-dim); background:transparent; border:1px solid var(--line-2)}
+.fb-btn-save{color:#fff; background:linear-gradient(135deg,#3b82f6,#6366f1); border:0}
 </style>
 """
 

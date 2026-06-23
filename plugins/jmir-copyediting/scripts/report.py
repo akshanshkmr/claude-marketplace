@@ -479,12 +479,14 @@ _STYLE = """<style>
   --zoom:1;
 }
 *{box-sizing:border-box}
-html,body{margin:0;height:100%}
+html,body{margin:0;min-height:100%}
 body{
+  min-height:100vh;
   background:
     radial-gradient(1100px 520px at 78% -8%, #1a2030 0%, transparent 60%),
     radial-gradient(900px 480px at 6% 4%, #15263a 0%, transparent 55%),
     var(--bg);
+  background-attachment:fixed;
   color:var(--ui); font-family:var(--ui-font);
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }

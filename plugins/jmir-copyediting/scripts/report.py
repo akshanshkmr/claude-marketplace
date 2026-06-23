@@ -472,7 +472,7 @@ def _topbar(title, source, n_auto, n_query) -> str:
         '    <label class="zoom"><span class="zi">A</span>'
         '<input type="range" id="zoom" min="85" max="150" value="100" aria-label="Zoom">'
         '<span class="za">A</span></label>\n'
-        '    <button class="btn-copy" id="copyInsights">Copy insights</button>\n'
+        '    <button class="btn-copy" id="fbExport">Export feedback</button>\n'
         '  </div>\n'
         '</header>\n'
     )
@@ -823,8 +823,17 @@ _SCRIPT = """
     else{ var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');flash(msg);}catch(e){} ta.remove(); }
   }
 
-  document.getElementById('copyInsights').addEventListener('click', function(){
-    copy(window.__INSIGHTS__||'', 'Insights copied to clipboard');
+  document.getElementById('fbExport').addEventListener('click', function(){
+    var fb=(window.__FEEDBACK_GET__&&window.__FEEDBACK_GET__())||[];
+    var payload={ schema:'jmir-feedback.v1', title:window.__TITLE__||'',
+      manuscript:window.__MSID__||'', source:window.__SOURCE__||'',
+      exportedAt:new Date().toISOString(), summary:window.__SUMMARY__||{}, feedback:fb };
+    var blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download=(window.__MSID__||'jmir')+'-feedback.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); },1000);
+    flash(fb.length+' feedback item'+(fb.length===1?'':'s')+' exported');
   });
 
   /* query <-> in-text linking */

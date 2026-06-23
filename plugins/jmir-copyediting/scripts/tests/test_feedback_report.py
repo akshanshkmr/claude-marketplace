@@ -56,6 +56,14 @@ def test_capture_js_present():
     assert "getSelection" in h, "selection capture not wired"
 
 
+def test_export_button_and_handler():
+    h = gen()
+    assert 'id="fbExport"' in h, "export button id missing"
+    assert "Export feedback" in h, "export button label missing"
+    assert "jmir-feedback.v1" in h, "export schema string missing"
+    assert "Copy insights" not in h, "old Copy insights label should be gone"
+
+
 def main():
     failures = 0
     for name, fn in sorted(globals().items()):

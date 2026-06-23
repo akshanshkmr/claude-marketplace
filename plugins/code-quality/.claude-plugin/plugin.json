@@ -1,0 +1,11 @@
+{
+  "name": "code-quality",
+  "description": "Code quality review skills for bugs, security, and best practices",
+  "version": "1.0.0",
+  "author": {
+    "name": "akshanshkmr"
+  },
+  "homepage": "https://github.com/akshanshkmr/claude-marketplace",
+  "repository": "https://github.com/akshanshkmr/claude-marketplace",
+  "license": "MIT"
+}

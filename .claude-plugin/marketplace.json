@@ -1,0 +1,34 @@
+{
+  "$schema": "https://agentskills.io/schemas/marketplace.json",
+  "name": "claude-marketplace",
+  "description": "Custom skills marketplace for Claude Code",
+  "owner": {
+    "name": "akshanshkmr",
+    "email": "akshanshkmr821@gmail.com"
+  },
+  "metadata": {
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "git-workflow",
+      "source": "./plugins/git-workflow",
+      "description": "Git workflow skills: smart commits and PR summaries",
+      "author": {
+        "name": "akshanshkmr"
+      },
+      "category": "productivity",
+      "tags": ["git", "commits", "pull-requests"]
+    },
+    {
+      "name": "code-quality",
+      "source": "./plugins/code-quality",
+      "description": "Code quality review skills",
+      "author": {
+        "name": "akshanshkmr"
+      },
+      "category": "code-review",
+      "tags": ["review", "quality", "best-practices"]
+    }
+  ]
+}

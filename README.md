@@ -13,8 +13,8 @@ A custom [Claude Code](https://code.claude.com) plugin marketplace hosting reusa
 ### 2. Install a plugin
 
 ```
-/plugin install git-workflow@claude-marketplace
-/plugin install code-quality@claude-marketplace
+/plugin install git-workflow@akshanshkmr-skills
+/plugin install code-quality@akshanshkmr-skills
 ```
 
 ### 3. Use the skills
@@ -90,7 +90,7 @@ plugins/
 
 ```
 /plugin marketplace update claude-marketplace
-/plugin install my-plugin@claude-marketplace
+/plugin install my-plugin@akshanshkmr-skills
 ```
 
 See the [Claude Code skills docs](https://code.claude.com/docs/en/skills) for full `SKILL.md` authoring guidance.

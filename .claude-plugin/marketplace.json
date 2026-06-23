@@ -1,6 +1,6 @@
 {
   "$schema": "https://agentskills.io/schemas/marketplace.json",
-  "name": "claude-marketplace",
+  "name": "akshanshkmr-skills",
   "description": "Custom skills marketplace for Claude Code",
   "owner": {
     "name": "akshanshkmr",

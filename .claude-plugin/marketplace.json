@@ -39,6 +39,16 @@
       },
       "category": "writing",
       "tags": ["copyediting", "jmir", "academic", "ama-style", "scholarly"]
+    },
+    {
+      "name": "study-notes-pdf",
+      "source": "./plugins/study-notes-pdf",
+      "description": "Generate polished, modern, colourful Notion/Linear-style PDF study notes for any subject from lecture slides, textbooks, handouts, or rough notes",
+      "author": {
+        "name": "akshanshkmr"
+      },
+      "category": "productivity",
+      "tags": ["pdf", "study-notes", "revision", "exam-prep", "reportlab"]
     }
   ]
 }

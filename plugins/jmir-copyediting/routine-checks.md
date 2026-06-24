@@ -6,23 +6,26 @@ terse and action-oriented. For the *reasoning* behind each rule, follow the cros
 into `house-style.md`, `statistics.md`, `abbreviations.md`, `tables-and-figures.md`, and
 `references.md`.
 
-## How this fits with the script
+## How this fits with the two layers
 
 Edits split into two layers, and you should use both:
 
-1. **Deterministic layer → `scripts/mechanical_edits.py`.** Every edit expressible as a
-   pattern (word-swaps, US spelling, P-value formatting, eponyms, quotes, trademark symbols,
-   noon/midnight) is caught here *exhaustively*. Run it first; a regex never forgets.
-   - `python scripts/mechanical_edits.py paper.docx` → human-readable report
-   - `… --json out.json` → structured findings for an agent to apply as tracked changes
-   - `… --apply fixed.docx` → applies only the `auto`-confidence fixes
-   - Findings are tagged `auto` (apply verbatim) or `review` (propose, confirm in context).
-2. **Judgement layer → this file + the other references + `query-bank.md`.** Everything the
-   regex can only *flag*: whether a context-dependent swap fits, rephrasing, restructuring,
-   statistical completeness, and the author queries to raise. The `review` findings from the
-   script map directly onto entries in `query-bank.md`.
+1. **Deterministic layer (codeless) -> `mechanical-rules.md`.** Every edit
+   expressible as a pattern (word-swaps, US spelling, P-value formatting, eponyms, trademark
+   symbols, noon/midnight) is listed there *exhaustively*. In the Word add-in there is no
+   script to run -- **you are the regex**: scan the open document against every rule so none
+   is missed.
+   - Each rule is tagged `auto` (apply as a **tracked change**, safe in any context) or
+     `query` (apply a tracked change only when context confirms; otherwise raise an
+     **anchored comment**).
+   - Mind the three context guards (URLs; "normal" in statistical usage; "manuscript" in
+     Acknowledgments) and the December 2025 policy that **`and/or` is now retained**.
+2. **Judgement layer -> this file + the other references + `query-bank.md`.** Everything a
+   find/replace can only *flag*: whether a context-dependent swap fits, rephrasing,
+   restructuring, statistical completeness, and the author queries to raise. The
+   `query`-tagged rules map directly onto entries in `query-bank.md`.
 
-The point of the split: the script guarantees the boring 100 mechanical edits are never
+The point of the split: the rule list guarantees the boring ~140 mechanical edits are never
 missed, freeing your attention for the judgement calls that actually need a human.
 
 ---

@@ -18,7 +18,11 @@
         "name": "akshanshkmr"
       },
       "category": "productivity",
-      "tags": ["git", "commits", "pull-requests"]
+      "tags": [
+        "git",
+        "commits",
+        "pull-requests"
+      ]
     },
     {
       "name": "code-quality",
@@ -28,17 +32,29 @@
         "name": "akshanshkmr"
       },
       "category": "code-review",
-      "tags": ["review", "quality", "best-practices"]
+      "tags": [
+        "review",
+        "quality",
+        "best-practices"
+      ]
     },
     {
       "name": "jmir-copyediting",
       "source": "./plugins/jmir-copyediting",
-      "description": "Comprehensive JMIR Publications copyediting skill covering house style, AMA style, statistics, tables, figures, references, and abbreviations with deterministic find/replace scripts and an interactive HTML review report",
+      "description": "JMIR Publications copyediting skill for the Claude for Word add-in: edits land in the document as native tracked changes and author queries as anchored comments, covering house style, AMA style, statistics, tables, figures, references, and abbreviations with a 139-rule deterministic find/replace reference",
       "author": {
         "name": "akshanshkmr"
       },
       "category": "writing",
-      "tags": ["copyediting", "jmir", "academic", "ama-style", "scholarly"]
+      "tags": [
+        "copyediting",
+        "jmir",
+        "academic",
+        "ama-style",
+        "scholarly",
+        "word-addin",
+        "tracked-changes"
+      ]
     },
     {
       "name": "study-notes-pdf",
@@ -48,7 +64,13 @@
         "name": "akshanshkmr"
       },
       "category": "productivity",
-      "tags": ["pdf", "study-notes", "revision", "exam-prep", "reportlab"]
+      "tags": [
+        "pdf",
+        "study-notes",
+        "revision",
+        "exam-prep",
+        "reportlab"
+      ]
     }
   ]
 }

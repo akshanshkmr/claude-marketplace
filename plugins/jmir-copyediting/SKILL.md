@@ -1,11 +1,13 @@
 ---
 name: jmir-copyediting
-description: Use when copyediting, reviewing, or formatting any scholarly manuscript for JMIR Publications — covers house style, AMA style, statistics, tables, figures, references, metadata, and abbreviations, and can render the copyedit as an interactive HTML review report
+description: Use this skill whenever copyediting, reviewing, redlining, or formatting a scholarly manuscript for JMIR Publications inside the Claude for Word add-in — even if the user just says "copyedit this paper," "apply house style," "fix the stats notation," or "work the reviewer comments." It applies edits directly in the open .docx as native Word tracked changes (and raises author queries as anchored comments), covering JMIR house style, AMA style (11th ed), statistics, tables, figures, references, metadata, and abbreviations.
 ---
 
 # JMIR Publications Copyediting Skill
 
-Comprehensive reference for copyediting scholarly manuscripts to JMIR house style and AMA Manual of Style (11th ed). It pairs a **chronological workflow** (Step 1 and Step 3 checklists) with a **deterministic find/replace engine** so that no mechanical edit is missed and attention stays on judgement calls.
+Comprehensive reference for copyediting scholarly manuscripts to JMIR house style and AMA Manual of Style (11th ed), built for the **Claude for Word add-in**. Every edit lands in the open document as a **native Word tracked change**; every author query lands as an **anchored comment**. It pairs a **chronological workflow** (Step 1 and Step 3 checklists) with a **deterministic find/replace reference** so that no mechanical edit is missed and attention stays on judgement calls.
+
+Read the **Runtime** section next — it defines how the two layers below are applied inside Word.
 
 ## Sub-Files (Load on Demand)
 
@@ -18,8 +20,26 @@ Comprehensive reference for copyediting scholarly manuscripts to JMIR house styl
 | `statistics.md` | P-values, leading zeros, spacing, eponyms, effect sizes, chi-square, t test, F test, CI, OR, IQR, Greek letters, currency, complex equations |
 | `tables-and-figures.md` | Table formatting, nesting, footnotes, textboxes, figure captions, permitted/prohibited figures, TOC image, multimedia appendices, CONSORT/PRISMA checklists |
 | `references.md` | In-text citations, reference list formatting, RefCheck, DOI/PMID, adding/deleting/reordering references, preprints, retractions, author names in text |
-| `scripts/mechanical_edits.py` | Deterministic scanner/fixer (no extra deps beyond python-docx). Catches every pattern-expressible edit exhaustively and tags each `auto` or `review` |
-| `scripts/report.py` | Renders the copyedit as a self-contained interactive HTML review report (Original/Diff/Final views + queries-and-rules sidebar). Reuses `mechanical_edits.py` and merges an optional judgement-edits JSON |
+| `mechanical-rules.md` | **The deterministic layer, codeless.** All 139 find/replace rules (spelling, word swaps, statistics, phrase flags, hyphenation), each tagged `auto` (→ tracked change) or `query` (→ anchored comment), plus the three context guards. This is the in-add-in replacement for the old Python scanner. |
+
+---
+
+## Runtime: Claude for Word add-in
+
+This skill runs **inside the open Word document**, not a terminal. There is no Python sandbox and no file to write — you read the live `.docx` and edit it in place.
+
+**Tracked changes are the application surface.** Claude for Word's *suggested-edits mode* keeps Track Changes on: each edit shows as a native deletion (old text) + insertion (new text) in Word's review pane, where the author accepts or rejects each one individually.
+
+- **Never turn Track Changes off.** Editing with it off bypasses the human review that copyediting depends on. If it is off, turn it on (or ask the user to) before editing.
+- **Edit surgically.** Make the smallest change that fixes the issue — swap a word, not a sentence; fix a value, not a paragraph. Small revisions are easy to accept and preserve the author's voice (JMIR editing is "light to moderate," Phase 5).
+- **Preserve formatting.** New text inherits the surrounding paragraph style, font, and numbering — do not restyle. Edit one span without disturbing the rest.
+- **Scope to selection when given one.** If the user has selected a passage, edit only that selection.
+
+**Author queries are comments, not edits.** Anything you would not silently change — a `query`-mode mechanical hit, a statistical-completeness gap, a data discrepancy, a metadata problem — goes in as an **anchored comment** on the relevant text, worded from `query-bank.md`. Do not bury a question inside a tracked change.
+
+**Comment threads (Step 3 / reviewer rounds).** Claude for Word can read existing comment threads and the text they anchor to. To "work the comments," go through each thread in order: make the agreed fix as a tracked change on the anchored text, then **reply in the thread** stating what you did. Resolve per the Step 3 rules.
+
+**What is out of add-in scope.** Claude edits the document; it cannot drive the OJS/Kriyadocs portal, run RefCheck, transfer metadata into web forms, generate XML/PDF previews, or send author emails. For checklist steps that live in those systems (eg, Step 1 Phase 10; Step 3 Phases 2, 3, 5, 6), do the in-document part as tracked changes/comments and leave a comment flagging the portal action for the human. Items that depend on the metadata form (ORCIDs, degrees, affiliations) can only be *flagged* in the document, since the form is not visible from Word.
 
 ---
 
@@ -27,56 +47,16 @@ Comprehensive reference for copyediting scholarly manuscripts to JMIR house styl
 
 Every JMIR copyedit is two kinds of work. Do **both**, in this order, so nothing slips.
 
-**Layer 1 — Deterministic (run the script first).** A regex never tires and never forgets, so the ~100 routine mechanical edits are enforced by code rather than memory:
+**Layer 1 — Deterministic.** A fixed list of 139 routine mechanical edits (US spelling, utilization to use, P=0.03 to P=.03, eponyms, trademark-symbol removal, noon/midnight, and the rest). In the terminal version a regex pass applied these; in the add-in **you are the regex** — read `mechanical-rules.md` and scan the document against every rule so none is missed. Each rule is tagged:
 
-```bash
-python scripts/mechanical_edits.py MANUSCRIPT.docx                 # human-readable report
-python scripts/mechanical_edits.py MANUSCRIPT.docx --json out.json # structured findings for an agent
-python scripts/mechanical_edits.py MANUSCRIPT.docx --apply out.docx# write a copy with AUTO fixes applied
-```
+- `auto` — safe regardless of context. Apply each as a **tracked change**.
+- `query` — correct most of the time but context-dependent (subjects to participants, manuscript to paper, "normal" health status, currency, URLs). Apply a tracked change **only** when context clearly confirms it; otherwise raise an **anchored comment**. Most map to a query in `query-bank.md`.
 
-Each finding is tagged:
-- `auto` — safe to apply verbatim (US spelling, utilization→use, P=0.03→P=.03, eponyms, curly quotes, ®/™ removal, noon/midnight). Apply these as tracked changes.
-- `review` — correct most of the time but context-dependent (subjects→participants, manuscript→paper, "normal" health status, currency, URLs). **Propose** each; confirm in context; most map to a query in `query-bank.md`.
+Mind the three context guards in `mechanical-rules.md` (URLs; "normal" in statistical usage; "manuscript" in Acknowledgments) and the December 2025 policy that **`and/or` is now retained**.
 
-To produce tracked changes from `--apply`: run it, then in Word use **Review → Compare** against the original. (An agent consuming `--json` should instead apply each finding as its own tracked change.)
-
-**Layer 2 — Judgement (everything the regex can only flag).** Rephrasing unclear sentences, restructuring to IMRD, moving ethics/funding to the right section, statistical completeness (a mean needs an SD, a median an IQR, an OR a 95% CI), abbreviation decisions, table/figure conversions, and the author queries. The reference files below and `query-bank.md` drive this layer. The chronological checklists in Step 1 / Step 3 are how you sequence both layers per manuscript.
+**Layer 2 — Judgement (everything a find/replace cannot reach).** Rephrasing unclear sentences as tracked changes, restructuring to IMRD, moving ethics/funding to the right section, statistical completeness (a mean needs an SD, a median an IQR, an OR a 95% CI), abbreviation decisions, table/figure conversions, and author queries. Clean fixes become tracked changes; anything needing the author becomes an anchored comment. The reference files below and `query-bank.md` drive this layer. The chronological checklists in Step 1 / Step 3 are how you sequence both layers per manuscript.
 
 > Tip: `routine-checks.md` is the condensed map of Layer 1 + the high-frequency Layer 2 calls. Read it first on any new paper; drop into the detailed files (`house-style.md`, `statistics.md`, etc.) when a specific rule needs its full treatment.
-
-### Visual review report (`scripts/report.py`)
-
-When the deliverable is a **review surface a human drives** rather than a tracked-changes `.docx`, render the copyedit as one self-contained HTML file. Applying clean tracked changes inside a real Word file is the step agents are least reliable at; this hands that step back to the copyeditor while showing every proposed edit in context.
-
-```bash
-python scripts/report.py MANUSCRIPT.docx --out report.html                        # mechanical layer only
-python scripts/report.py MANUSCRIPT.docx --edits judgement.json --out report.html # + judgement layer
-python scripts/report.py MANUSCRIPT.txt  --out report.html --title "Paper Title"  # .txt also accepted
-```
-
-`report.py` imports the rule tables from `mechanical_edits.py`, so the deterministic layer is always present. The report has three toggleable views — **Original**, **Diff** (deletions struck, insertions green, queries as dotted-amber markers), and **Final** (auto edits applied; queried text left for the author to confirm) — plus a sidebar that groups every **author query** (with copy + resolve controls and a progress bar) and tallies the **mechanical rules applied**. A zoom control and a **Copy insights** button (counts + numbered queries to clipboard) round it out. Edits are colour-coded by family (style / statistics / structure / query) and carry `data-diff`, `data-edited`, `data-tag-type`, `data-mode`, and `data-track-detail`; front matter is tagged with JMIR-style classes (`jrnlArticleTitle`, `jrnlAuthor`, `jrnlAffil`, section heads).
-
-**Feeding the judgement layer.** `--edits` takes a JSON list (or `{"edits": [...]}`); each item is located in the text by its `original` string at the given `para_index`:
-
-```json
-[
-  {"para_index": 9, "original": "PHQ-9",
-   "suggestion": "Patient Health Questionnaire-9 (PHQ-9)",
-   "tag_type": "acronym expansion", "mode": "auto",
-   "note": "Expand at first use, then abbreviate (AMA 14.4)"},
-
-  {"para_index": 9, "original": "318", "suggestion": "318",
-   "tag_type": "value", "mode": "review",
-   "query": "Methods reports 318 enrolled but Results says 312 — please reconcile."}
-]
-```
-
-- `mode: "auto"` → applied in the **Final** view (a clean change).
-- `mode: "review"` (or any non-`auto`) → rendered as an **author query**; supply a `query` string for exact wording, else it is synthesized from `note`/`suggestion`.
-- `tag_type` is free text and drives the chip + colour family (`spelling`, `word choice`, `value`, `statistics`, `eponym`, `acronym expansion`, `structure`, `flag`, …).
-
-**Review workflow.** Open `report.html` in a browser → skim **Diff** → toggle **Final** for the clean result → work the **Queries** pane, copying each into your author-query list and ticking it resolved (state persists locally) → transcribe the accepted edits into Word yourself. Structural placement (IMRD order, moving sections) still belongs to Layer 2.
 
 ---
 
@@ -84,13 +64,14 @@ python scripts/report.py MANUSCRIPT.txt  --out report.html --title "Paper Title
 
 ### Phase 1: Document Initialization & Setup
 
-1. **Unlink field codes**: Select all (`Ctrl+A`) → `Ctrl+Shift+F9` (Windows) or `Cmd+6` then `Cmd+Shift+Fn+F9` (macOS). If field codes persist, copy all text to a plain text editor and paste back into a new Word document.
-2. **Set proofing language**: Select all text → set proofing language to **English (United States)**.
-3. **Reset spelling**: Reset spelling and grammar checker to run a fresh check from the beginning.
-4. **Set user info**: In MS Word, set user information to `[Your Name] (JMIR)` for tracked changes and comments.
-5. **Identify article type**: Locate the article type at the top of the Word manuscript (eg, Original Paper, Review, Protocol/Proposal, Short Paper, Viewpoint, Implementation Report). If missing, check the submission note/metadata and add the most appropriate type from the approved list.
-6. **Check for Morisky scales**: Search (`Ctrl+F`) for "Morisky" or "MMAS". If found, query authors to provide license documentation or exclude all references to Morisky/MMAS.
-7. **Check assignment email/submission note**: Read any special instructions tagged as "CE:" in the submission note on the article page.
+In the add-in, setup is light — most of this is verifying state, not manual menu work.
+
+1. **Confirm Track Changes is on.** Suggested-edits mode must be engaged so every edit lands as a tracked change. If it is off, turn it on (or ask the user to) before making any edit. Never edit with it off.
+2. **Proofing language / fresh spell-check** *(user-side, optional)*: these are Word desktop settings the user controls (set proofing language to **English (United States)**). You apply US spelling via the Layer 1 rules regardless of Word's proofing setting.
+3. **Author identity on changes** *(user-side)*: tracked changes are attributed by the add-in; the human copyeditor sets their own display name in Word if needed.
+4. **Identify article type**: Locate the article type at the top of the manuscript (eg, Original Paper, Review, Protocol/Proposal, Short Paper, Viewpoint, Implementation Report). If missing, add the most appropriate type from the approved list as a tracked change, or raise a comment if you cannot determine it from the document.
+5. **Check for Morisky scales**: Scan for "Morisky" or "MMAS". If found, raise a comment asking authors to provide license documentation or to remove all references to Morisky/MMAS.
+6. **Honor any "CE:" instructions**: If the user pastes or references special instructions from the submission note (tagged "CE:"), apply them. You cannot read the article page yourself — ask the user for any such instructions if relevant.
 
 ### Phase 2: Title & Headings
 

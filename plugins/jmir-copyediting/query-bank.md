@@ -4,7 +4,7 @@ Paste-ready author queries drawn from real JMIR copyediting query lists. Use the
 **judgement layer** — the issues a human must raise rather than silently fix. Replace
 bracketed placeholders (`[X]`, `[author initials]`, `[Table X]`, `""`) with specifics.
 
-**How to use:** when `mechanical_edits.py` returns a `review` finding, or when you spot a
+**How to use:** when a `query`-tagged rule in `mechanical-rules.md` applies, or when you spot a
 judgement issue, find the matching query below and adapt it. Keep the wording — it is the
 house voice authors are used to. Always keep the leading **blanket comment** on every paper.
 Most queries follow the pattern *state the rule → state what you did (if anything) → ask the

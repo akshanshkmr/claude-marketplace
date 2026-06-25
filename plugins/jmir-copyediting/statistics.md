@@ -1,6 +1,8 @@
 # JMIR Guidelines for Reporting Statistics
 
-Complete reference for formatting and reporting all statistical values in JMIR manuscripts. Based on JMIR Guidelines for Reporting Statistics and AMA Manual of Style (11th ed).
+Complete reference for formatting and reporting all statistical values in JMIR manuscripts.
+
+> **Authority hierarchy**: JMIR Guidelines for Reporting Statistics is the primary authority. AMA Manual of Style (11th ed) is a secondary fallback only — apply AMA rules only for situations not explicitly covered here. Where JMIR and AMA differ, JMIR takes precedence.
 
 ---
 
@@ -50,6 +52,20 @@ Complete reference for formatting and reporting all statistical values in JMIR m
 ### 2.5 P Values in Footnotes
 - Do NOT use `P≤.001` in footnotes. Provide exact P values where possible.
 - If the exact value is below the threshold, use `P<.001`.
+
+### 2.6 Semicolon Separator Between Test Statistic and P Value (JMIR rule)
+When a test statistic and its P value are reported together in running text, separate them with a **semicolon** — not a comma.
+
+| ❌ Comma (AMA default) | ✅ Semicolon (JMIR) |
+|------------------------|---------------------|
+| `t15=2.68, P=.01` | `t15=2.68; P=.01` |
+| `χ²1=4.56, P=.03` | `χ²1=4.56; P=.03` |
+| `F2,45=3.21, P=.049` | `F2,45=3.21; P=.049` |
+| `OR 2.45 (95% CI 1.23-4.89), P=.03` | `OR 2.45 (95% CI 1.23-4.89); P=.03` |
+| `mean 45.3 (SD 12.7), P=.04` | `mean 45.3 (SD 12.7); P=.04` |
+
+Apply this rule consistently across all test types (t, F, χ², OR, HR, r, etc.).  
+Exception: in table cells where space is constrained, the comma form is acceptable.
 
 ---
 
@@ -102,16 +118,26 @@ Complete reference for formatting and reporting all statistical values in JMIR m
 
 ## §6. Mean, Standard Deviation, Standard Error, and Range
 
-### 6.1 Formatting
-| Statistic | Format | Example |
-|-----------|--------|---------|
-| Mean and SD | `mean (SD)` | `45.3 (12.7)` |
-| Mean and SE | `mean (SE)` | `45.3 (2.1)` |
-| Mean and range | `mean (range min-max)` | `45.3 (range 20-68)` |
+### 6.1 In-Text Format
+In running text, **always include the statistic label** alongside the value so the reader does not have to infer from context.
+
+| Statistic | In-text format | Example |
+|-----------|---------------|---------|
+| Mean and SD | `mean X (SD Y)` | `mean 45.3 (SD 12.7)` |
+| Mean and SE | `mean X (SE Y)` | `mean 45.3 (SE 2.1)` |
+| Mean and range | `mean X (range Y–Z)` | `mean 45.3 (range 20–68)` |
+
+- Write `mean` in full lowercase; `SD`, `SE` as uppercase abbreviations in parentheses.
+- The value follows immediately: `mean 45.3 (SD 12.7)` — not `mean: 45.3` and not `45.3 (12.7)` without labels when labels are needed for clarity.
+- When followed by a P value, separate with a semicolon: `mean 45.3 (SD 12.7); P=.04` (see §2.6).
 
 ### 6.2 In Tables
-- Group mean/SD in a single cell: `mean (SD)`.
-- Column header should specify: `Score, mean (SD)`.
+- Cell value: numbers only — `45.3 (12.7)` (labels go in the column header, not the cell).
+- Column header: `Score, mean (SD)`.
+- Do NOT repeat "mean" or "SD" inside table cells — the header carries those labels.
+
+### 6.3 Reporting Completeness (JMIR rule)
+A mean **must** be paired with an SD (or SE, or range — but SD is standard). If an SD is missing, query the author. Do not leave a lone mean without a measure of spread.
 
 ---
 
@@ -142,7 +168,7 @@ Complete reference for formatting and reporting all statistical values in JMIR m
 - Use the symbol χ² (Greek chi, superscript 2).
 - Italic: *χ²*
 - Include degrees of freedom as subscript: χ²₁ or in text as `χ²1`
-- Format: `χ²1=4.56`, `P=.03`
+- Format: `χ²1=4.56; P=.03` (semicolon before P — see §2.6)
 - The word form is "chi-square test" (hyphenated, lowercase).
 
 ---
@@ -152,7 +178,7 @@ Complete reference for formatting and reporting all statistical values in JMIR m
 - Two words, no hyphen: **t test** (NOT "t-test").
 - *t* is **italic** and lowercase.
 - Include degrees of freedom as subscript: *t*₁₅ or in text as `t15`.
-- Format: `t15=2.68`, `P=.01`
+- Format: `t15=2.68; P=.01` (semicolon before P — see §2.6)
 - No possessive: it is NOT "Student's t test" — use `t test`.
 
 ---
@@ -161,7 +187,7 @@ Complete reference for formatting and reporting all statistical values in JMIR m
 
 - *F* is **italic** and capitalized.
 - Include degrees of freedom (numerator, denominator) as subscripts: F₂,₄₅ or in text as `F2,45`.
-- Format: `F2,45=3.21`, `P=.049`
+- Format: `F2,45=3.21; P=.049` (semicolon before P — see §2.6)
 
 ---
 

@@ -236,9 +236,10 @@ The following types of figures are not permitted or require action:
 
 ### §20. TOC Image
 
-1. Query the author if a TOC image has not been provided.
-2. Template comment: "Do you have a figure you would like to use for the Table of Contents thumbnail image? If not, we can select one for you."
-3. The TOC image is separate from the manuscript figures.
+1. **Reuse existing figures first**: If the manuscript contains suitable figures (eg, screenshots of the intervention, a person using the intervention), they can serve as the TOC image without re-uploading — just note this in the layout comment.
+2. **Query if no TOC**: If there are no suitable figures, query the author: "Do you have a figure you would like to use for the Table of Contents thumbnail image? If not, we can select one for you."
+3. **If author does not provide a TOC image**: Leave a layout comment for the typesetter to inform them.
+4. The TOC image is uploaded separately from the manuscript figures (via the article webpage "Editing" tab).
 
 ---
 

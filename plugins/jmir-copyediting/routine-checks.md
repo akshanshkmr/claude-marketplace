@@ -128,7 +128,7 @@ title case on headings (see `house-style.md` §3); IMRD present and justified fo
 
 ## 6. Numbers, percentages, statistics (see `statistics.md`)
 
-- **P values**: italic *P*; **no leading zero** (P=.03, not P=0.03); **no spaces** around operators; round to 2 decimals, or 3 when P<.01 or when rounding flips significance (eg, P=.048); P<.001 for anything smaller (P<.0001 / P=.0005 → P<.001); P=1 → P≥.99; P=0 → P<.001; give the **exact** P unless P<.001 or P≥.99. `auto` for formatting; `ctx`/query for rounding and exactness.
+- **P values**: italic *P*; **no leading zero** (P=.03, not P=0.03); **no spaces** around operators; round to 2 decimals, or 3 when P<.01 or when rounding flips significance (eg, P=.048); P<.001 for anything smaller (P<.0001 / P=.0005 → P<.001); P=1 → P>.99; P=0 → P<.001; give the **exact** P unless P<.001 or P>.99. `auto` for formatting; `ctx`/query for rounding and exactness.
 - **Semicolon before P**: when a test statistic and P value appear together in running text, separate with a **semicolon** (JMIR rule, takes precedence over AMA comma convention): `t15=2.68; P=.01`, `χ²1=4.56; P=.03`, `OR 2.45 (95% CI 1.23-4.89); P=.03`. Exception: comma is acceptable inside table cells. `ctx`
 - **α, β**: no leading zero. Confirm whether "α" means Cronbach α or α level (query).
 - **Eponyms, no possessive**: Cronbach α, Cohen d, Fisher exact, Hedges g. `auto`

@@ -6,6 +6,8 @@ terse and action-oriented. For the *reasoning* behind each rule, follow the cros
 into `house-style.md`, `statistics.md`, `abbreviations.md`, `tables-and-figures.md`, and
 `references.md`.
 
+> **Style authority**: JMIR House Style and Editorial Guidelines are the **primary authority**. AMA Manual of Style (11th ed) is a secondary fallback — apply AMA only for situations not covered by JMIR. When JMIR and AMA conflict, JMIR wins.
+
 ## How this fits with the two layers
 
 Edits split into two layers, and you should use both:
@@ -119,7 +121,7 @@ title case on headings (see `house-style.md` §3); IMRD present and justified fo
 - Straight quotes/apostrophes → **curly** ("abc" → "abc"; ' → '). `auto`
 - Remove **® ™ ℠** trademark symbols. `auto`
 - **&** → "and" (except established names/abbreviations). `ctx`
-- **and/or** → choose "and" or "or". `ctx`
+- **and/or** — **retain as is** (December 2025 policy update; do not rephrase). `auto`
 - **Solidus "/"** must not mean "and"/"or" (but "race/ethnicity", dates, units, URLs are fine).
 - **En dash for compound modifiers** attached to open compounds: "mobile phone–based app" (NOT "mobile phone-based app"). See `house-style.md` §8.4. `ctx`
 - **Hyphenate these compounds when attributive** (`ctx`): quality-of-life, standard-of-care, intention-to-treat (ITT), proof-of-concept, one-size-fits-all, face-to-face, step-by-step, day-to-day, around-the-clock, gain-of-function, loss-of-function, before-and-after study, one-on-one.
@@ -129,7 +131,9 @@ title case on headings (see `house-style.md` §3); IMRD present and justified fo
 
 ## 6. Numbers, percentages, statistics (see `statistics.md`)
 
-- **P values**: italic *P*; **no leading zero** (P=.03, not P=0.03); **no spaces** around operators; round to 2 decimals, or 3 when P<.01 or when rounding flips significance (eg, P=.048); P<.001 for anything smaller (P<.0001 / P=.0005 → P<.001); P=1 → P≥.99; P=0 → P<.001; give the **exact** P unless P<.001 or P≥.99. `auto` for formatting; `ctx`/query for rounding and exactness.
+- **P values**: italic *P*; **no leading zero** (P=.03, not P=0.03); **no spaces** around operators; round to 2 decimals, or 3 when P<.01 or when rounding flips significance (eg, P=.048); P<.001 for anything smaller (P<.0001 / P=.0005 → P<.001); P=1 → P>.99; P=0 → P<.001; give the **exact** P unless P<.001 or P>.99. `auto` for formatting; `ctx`/query for rounding and exactness.
+- **Semicolon before P**: when a test statistic and P value appear together in running text, separate with a **semicolon** (JMIR rule, takes precedence over AMA comma convention): `t15=2.68; P=.01`, `χ²1=4.56; P=.03`, `OR 2.45 (95% CI 1.23-4.89); P=.03`. Exception: comma is acceptable inside table cells. `ctx`
+- **Mean/SD in text**: use `mean X (SD Y)` format — labels must appear: `mean 45.3 (SD 12.7)`. In table cells omit labels (header carries them): `45.3 (12.7)`. A lone mean without SD is incomplete — query. `ctx`
 - **α, β**: no leading zero. Confirm whether "α" means Cronbach α or α level (query).
 - **Eponyms, no possessive**: Cronbach α, Cohen d, Fisher exact, Hedges g. `auto`
 - **Percentages with counts**: report as `n (%)` in tables; in text put the count first — "(59/100, 59%)"; when the % is emphasized — "59% (59/100)". For N<100 → no decimal place on %; for 100≤N≤1000 → 1 decimal place.

@@ -130,7 +130,7 @@ author to confirm*.
 - Please check and confirm if "relatives" can be changed to "caregivers" throughout the text. I have highlighted the instances in yellow for your ease.
 - Please avoid ambiguous terms like "online," "virtual," "interactive." Retain "online" if the intervention/product is accessible through multiple modes (eg, on the web and an app). Use "internet-based" only if an intervention includes non–web-based internet components (eg, email). Use "computer-based" or "electronic" only if offline products are used. Use "virtual" only in the context of "virtual reality" (3D worlds). Use "online" only in the context of "online support groups." I have highlighted them in yellow for your ease.
 - Per the journal guidelines, the use of ambiguous terms (eg, "question(s), intervention(s)", etc) should be avoided. Please verify and correct as applicable. I have highlighted the instances in turquoise for your ease.
-- As per the journal guidelines, the use of "and/or" should be avoided. Therefore, I have changed "and/or" here. Please verify and correct as applicable.
+*(Note: as of December 2025, "and/or" is retained as is — do not query for this.)*
 - As per the house style, solidus (/) should not be used to denote "and" or "or". Please correct as applicable.
 - As per the journal's guidelines, the use of // symbols is not permitted. Instead, the first letter of the name may be capitalized. Please confirm.
 - JMIR prefers lowercase unless it is a proper noun. Hence I have changed "[X]" to "[x]" throughout the text.
@@ -183,7 +183,7 @@ author to confirm*.
 - As per the journal guidelines, all P values should be presented to two decimals, or to three decimals when P<.01 or when rounding would change significance (eg, P=.048).
 - Please round off the P values that I have highlighted in green to a maximum of 2 decimal points.
 - As per the journal guidelines, P values less than .001 (including 0.000) are not allowed and are to be converted to the expression P<.001. For example, P<.0001 or P=.0005 must be rewritten as P<.001. Therefore, I have made changes accordingly. Please check.
-- As per the journal guidelines, the exact P value should be expressed (P=...) rather than a statement of inequality (P<...), unless P<.001 or P≥.99 (note, P=1 and P=0 should be revised to P≥.99 and P<.001, respectively). Please provide the exact P.
+- As per the journal guidelines, the exact P value should be expressed (P=...) rather than a statement of inequality (P<...), unless P<.001 or P>.99 (note, P=1 and P=0 should be revised to P>.99 and P<.001, respectively). Please provide the exact P.
 - As per the journal guidelines, only P values <.001 can be represented as such (with an inequality sign). All other exact P values should be provided. I request that you add the exact P values to the last inserted column.
 - Please report all the chi-square values to only 1 decimal point. I have highlighted them in green for your ease.
 - Please provide the degrees of freedom for all χ² values within parentheses.

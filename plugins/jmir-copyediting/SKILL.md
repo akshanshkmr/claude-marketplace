@@ -9,6 +9,10 @@ Comprehensive reference for copyediting scholarly manuscripts to JMIR house styl
 
 Read the **Runtime** section next — it defines how the two layers below are applied inside Word.
 
+## Style Authority Hierarchy
+
+**JMIR House Style and Editorial Guidelines are the primary authority.** AMA Manual of Style (11th ed) is a secondary fallback — apply AMA only for situations not explicitly covered by JMIR. When JMIR and AMA conflict, JMIR wins. This hierarchy applies to every section of this skill and all sub-files.
+
 ## Sub-Files (Load on Demand)
 
 | File | Covers |
@@ -331,7 +335,7 @@ Apply all rules in `references.md`. Key checks:
 ### Blanket Comment (always add at beginning of every manuscript)
 
 **OJS version:**
-> Please go through my revisions and address all comments flagged in the manuscript. Do not accept or reject any changes (made by me) to the document. Copyediting is intended to bring the manuscript in line with AMA style and our JMIR House Style and Editorial Guidelines. Instead of rejecting tracked changes, add a Comment if you disagree with any edits. In addition, list your required changes using the comments feature. If you do make any minor changes to the text, keep Track Changes on in the document. If you wish to view the manuscript without any track changes, change the view to Simple Markup for easy readability. Following submission of your revised manuscript in Step 2 of Copyediting, I will do a final round of editing on your paper in Step 3 (before typesetting) to incorporate the changes requested by you. If you require any assistance during Step 2 of copyediting, you can reach out to me at [insert copyeditor's email address], and I would be happy to help you.
+> Please go through my revisions and address all comments flagged in the manuscript. Do not accept or reject any changes (made by me) to the document. Copyediting is intended to bring the manuscript in line with our JMIR House Style and Editorial Guidelines and AMA Manual of Style (11th ed). Instead of rejecting tracked changes, add a Comment if you disagree with any edits. In addition, list your required changes using the comments feature. If you do make any minor changes to the text, keep Track Changes on in the document. If you wish to view the manuscript without any track changes, change the view to Simple Markup for easy readability. Following submission of your revised manuscript in Step 2 of Copyediting, I will do a final round of editing on your paper in Step 3 (before typesetting) to incorporate the changes requested by you. If you require any assistance during Step 2 of copyediting, you can reach out to me at [insert copyeditor's email address], and I would be happy to help you.
 
 **Kriyadocs version:**
 > Please go through my revisions and address all author queries (AQs) in the manuscript. Copyediting is intended to bring the manuscript in line with the JMIR House Style and Editorial Guidelines and AMA Manual of Style (11th ed). Do not reject any tracked changes made to the document. Instead of rejecting tracked changes, add a copyeditor query (CQ) if you disagree with any edits. In addition, insert a CQ for any additional requests or queries. Please follow the instructions in the email to complete the Author Revisions step. Thereafter, I will do a final round of editing on your paper in the Copyediting Final stage (before typesetting) to incorporate the changes requested by you. If you have any questions, please contact me at [your email]. — [Sign off with your name]

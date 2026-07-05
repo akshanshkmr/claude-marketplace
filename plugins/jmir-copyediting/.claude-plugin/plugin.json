@@ -1,7 +1,7 @@
 {
   "name": "jmir-copyediting",
   "description": "JMIR Publications copyediting skill for the Claude for Word add-in: applies edits directly in the open document as native Word tracked changes and raises author queries as anchored comments, covering JMIR house style, AMA style (11th ed), statistics, tables, figures, references, metadata, and abbreviations, backed by a 139-rule deterministic find/replace reference",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": {
     "name": "akshanshkmr"
   },

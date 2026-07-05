@@ -35,7 +35,7 @@ This skill runs **inside the open Word document**, not a terminal. There is no P
 **Tracked changes are the application surface.** Claude for Word's *suggested-edits mode* keeps Track Changes on: each edit shows as a native deletion (old text) + insertion (new text) in Word's review pane, where the author accepts or rejects each one individually.
 
 - **Never turn Track Changes off.** Editing with it off bypasses the human review that copyediting depends on. If it is off, turn it on (or ask the user to) before editing.
-- **Edit surgically.** Make the smallest change that fixes the issue — swap a word, not a sentence; fix a value, not a paragraph. Small revisions are easy to accept and preserve the author's voice (JMIR editing is "light to moderate," Phase 5).
+- **Edit surgically.** Make the smallest change that fixes the issue — swap a word, not a sentence; fix a value, not a paragraph. Small revisions are easy to accept and preserve the author's voice (JMIR editing is "light to moderate," Pass 4).
 - **Preserve formatting.** New text inherits the surrounding paragraph style, font, and numbering — do not restyle. Edit one span without disturbing the rest.
 - **Scope to selection when given one.** If the user has selected a passage, edit only that selection.
 
@@ -43,7 +43,7 @@ This skill runs **inside the open Word document**, not a terminal. There is no P
 
 **Comment threads (Step 3 / reviewer rounds).** Claude for Word can read existing comment threads and the text they anchor to. To "work the comments," go through each thread in order: make the agreed fix as a tracked change on the anchored text, then **reply in the thread** stating what you did. Resolve per the Step 3 rules.
 
-**What is out of add-in scope.** Claude edits the document; it cannot drive the OJS/Kriyadocs portal, run RefCheck, transfer metadata into web forms, generate XML/PDF previews, or send author emails. For checklist steps that live in those systems (eg, Step 1 Phase 10; Step 3 Phases 2, 3, 5, 6), do the in-document part as tracked changes/comments and leave a comment flagging the portal action for the human. Items that depend on the metadata form (ORCIDs, degrees, affiliations) can only be *flagged* in the document, since the form is not visible from Word.
+**What is out of add-in scope.** Claude edits the document; it cannot drive the OJS/Kriyadocs portal, run RefCheck, transfer metadata into web forms, generate XML/PDF previews, or send author emails. For checklist steps that live in those systems (eg, Step 1 Closeout; Step 3 Phases 2, 3, 5, 6), do the in-document part as tracked changes/comments and leave a comment flagging the portal action for the human. Items that depend on the metadata form (ORCIDs, degrees, affiliations) can only be *flagged* in the document, since the form is not visible from Word.
 
 ---
 
@@ -58,26 +58,50 @@ Every JMIR copyedit is two kinds of work. Do **both**, in this order, so nothing
 
 Mind the three context guards in `mechanical-rules.md` (URLs; "normal" in statistical usage; "manuscript" in Acknowledgments) and the December 2025 policy that **`and/or` is now retained**.
 
-**Layer 2 — Judgement (everything a find/replace cannot reach).** Rephrasing unclear sentences as tracked changes, restructuring to IMRD, moving ethics/funding to the right section, statistical completeness (a mean needs an SD, a median an IQR, an OR a 95% CI), abbreviation decisions, table/figure conversions, and author queries. Clean fixes become tracked changes; anything needing the author becomes an anchored comment. The reference files below and `query-bank.md` drive this layer. The chronological checklists in Step 1 / Step 3 are how you sequence both layers per manuscript.
+**Layer 2 — Judgement (everything a find/replace cannot reach).** Rephrasing unclear sentences as tracked changes, restructuring to IMRD, moving ethics/funding to the right section, statistical completeness (a mean needs an SD, a median an IQR, an OR a 95% CI), abbreviation decisions, table/figure conversions, and author queries. Clean fixes become tracked changes; anything needing the author becomes an anchored comment. The reference files below and `query-bank.md` drive this layer. The Step 1 **pass structure** below is how you sequence both layers per manuscript.
+
+**How the layers map to passes.** Do not apply both layers in one read of the document — that split attention is why edits get missed. Layer 1 is run first as a single deterministic sweep (**Pass 0**). Layer 2 is then split across focused passes (**Passes 1–8**), one category at a time, each closed by a Completion Gate, with a final **Gap Sweep** to catch misses. See "Step 1 — The Pass Method" below.
 
 > Tip: `routine-checks.md` is the condensed map of Layer 1 + the high-frequency Layer 2 calls. Read it first on any new paper; drop into the detailed files (`house-style.md`, `statistics.md`, etc.) when a specific rule needs its full treatment.
 
 ---
 
-## Step 1: Initial Copyedit (Chronological Checklist)
+## Step 1: Initial Copyedit — The Pass Method
 
-### Phase 1: Document Initialization & Setup
+> **Why passes.** A JMIR manuscript is too much to hold at once. Reading it top-to-bottom while trying to apply 139 mechanical rules *and* every judgment call at the same time is exactly how edits get missed — attention splits and something slips. So you do **not** read once. You make one **focused pass per category**, each over the *whole* document, and you **finish and verify** each pass before starting the next.
+
+**The three rules of the pass method:**
+
+1. **One category, whole document, then stop.** In each pass you scan the entire manuscript for *only* that pass's concern. Do not fix a table while you are on the Statistics pass — note it if you must, but stay in your lane. Mixing concerns is what causes misses.
+2. **Every pass ends at its Completion Gate.** Each pass closes with a `✓ Gate:` line — a self-check you must be able to answer *yes* to before advancing. If you cannot, the pass is not done. The gate is the forcing function that makes a single agent exhaustive.
+3. **The Gap Sweep is mandatory, and it only adds.** After the last pass, the Final Pass re-reads the document against a compact audit checklist to catch what earlier passes missed. It may **add** missed edits/queries only — it must **never** revisit, re-open, or re-edit changes already made. One sweep; do not loop indefinitely.
+
+Run the passes **in order** (mechanical first, so deterministic edits are done before judgment work; gap sweep last). Layer 1 from the section above **is Pass 0**; Layer 2 is spread across Passes 1–8.
+
+### Before you start (setup — not a pass)
 
 In the add-in, setup is light — most of this is verifying state, not manual menu work.
 
-1. **Confirm Track Changes is on.** Suggested-edits mode must be engaged so every edit lands as a tracked change. If it is off, turn it on (or ask the user to) before making any edit. Never edit with it off.
+1. **Confirm Track Changes is on.** Suggested-edits mode must be engaged so every edit lands as a tracked change. If it is off, turn it on (or ask the user to) before making any edit. Never edit with it off. **This is prerequisite to every pass below.**
 2. **Proofing language / fresh spell-check** *(user-side, optional)*: these are Word desktop settings the user controls (set proofing language to **English (United States)**). You apply US spelling via the Layer 1 rules regardless of Word's proofing setting.
 3. **Author identity on changes** *(user-side)*: tracked changes are attributed by the add-in; the human copyeditor sets their own display name in Word if needed.
-4. **Identify article type**: Locate the article type at the top of the manuscript (eg, Original Paper, Review, Protocol/Proposal, Short Paper, Viewpoint, Implementation Report). If missing, add the most appropriate type from the approved list as a tracked change, or raise a comment if you cannot determine it from the document.
+4. **Identify article type**: Locate the article type at the top of the manuscript (eg, Original Paper, Review, Protocol/Proposal, Short Paper, Viewpoint, Implementation Report). If missing, add the most appropriate type from the approved list as a tracked change, or raise a comment if you cannot determine it from the document. *(Article type drives later passes — abstract structure, title rules, required checklists — so pin it down now.)*
 5. **Check for Morisky scales**: Scan for "Morisky" or "MMAS". If found, raise a comment asking authors to provide license documentation or to remove all references to Morisky/MMAS.
 6. **Honor any "CE:" instructions**: If the user pastes or references special instructions from the submission note (tagged "CE:"), apply them. You cannot read the article page yourself — ask the user for any such instructions if relevant.
 
-### Phase 2: Title & Headings
+### Pass 0 — Mechanical Scan (deterministic; do this first)
+
+Run the **entire** deterministic layer before any judgment pass, so mechanical edits never compete with judgment for attention. Open `mechanical-rules.md` and scan the whole document against **every one** of the 139 rules — you are the regex.
+
+- `auto` rules → apply each as a **tracked change** wherever it matches.
+- `query` rules → tracked change **only** when context clearly confirms it; otherwise an **anchored comment** (most map to `query-bank.md`).
+- Mind the three context guards (URLs; "normal" in statistical usage; "manuscript" in Acknowledgments) and the December 2025 policy that **`and/or` is retained**.
+
+Go rule-by-rule, not paragraph-by-paragraph: pick a rule, sweep the whole document for it, then the next rule. That ordering is what stops mechanical misses.
+
+**✓ Gate:** Have you passed all 139 rules over the full document — each rule swept end-to-end — with `auto` applied and `query` hits either confirmed or commented? If any rule was skipped, you are not done.
+
+### Pass 1 — Structure & Title
 
 1. **Title case**: Ensure the title is in **title case** (headline style). See `house-style.md` §3 for capitalization rules.
 2. **Character limit**: All titles must fit within a **280-character limit** (including spaces).
@@ -98,7 +122,9 @@ In the add-in, setup is light — most of this is verifying state, not manual me
 8. **IMRD structure**: Verify Introduction → Methods → Results → Discussion for Original Papers. If the structure deviates, confirm it is justified per the article type.
 9. **Multipart papers**: If paper is "Part 2" or later, ensure previous parts are cited in the Introduction.
 
-### Phase 3: Metadata Verification
+**✓ Gate:** Title in title case and ≤280 chars; study-design phrasing correct for the article type; every heading swept for level + title case; IMRD confirmed or the deviation justified.
+
+### Pass 2 — Metadata
 
 1. **Author names**: Check spelling, capitalization against OJS metadata. Use initials format: Bryan George Miller → BGM (not BM). Full first name required (unless author objects). No periods after initials, no space between multiple initials. For hyphenated given names: Ka-Wai Tam → KWT (no hyphen in initials). See `references.md` for author name formatting in body text.
 2. **Author degrees**:
@@ -126,7 +152,9 @@ In the add-in, setup is light — most of this is verifying state, not manual me
 7. **Keywords**: Separated by semicolons, sentence case, no trailing period/semicolon. Remove duplicate singular/plural forms; retain only one. Remove overly generic keywords. Recommend **5-12 keywords** including MeSH terms. If abbreviations are used as keywords, include expanded versions too. Use search variants (eg, "smartphone" AND "mobile phone" AND "mHealth").
 8. **License to Publish (LTP) form**: Verify all authors have signed. Cross-check COI reported in the LTP against the Conflicts of Interest section. For missing signatures or discrepancies, query authors in Step 1. If an author needs form assistance (resend, link expired), forward to `copyediting@jmir.org`. Outstanding issues in Step 3 → leave a Layout Note.
 
-### Phase 4: Abstract Copyediting
+**✓ Gate:** Every author checked for name format, degrees (low→high, no certs), and affiliation formatting; corresponding author complete; ORCIDs verified or queried; keywords formatted (5–12, semicolons, sentence case); LTP/COI cross-checked. Metadata-form items you can't see from Word are *flagged as comments*, not silently passed.
+
+### Pass 3 — Abstract
 
 1. **Word count**: Both structured and unstructured abstracts must not exceed **450 words**.
    - If abstract exceeds limit by ≤50 words: attempt to reduce (eg, remove wordy constructs, redundant expressions, circumlocutions, convert passive to active voice).
@@ -158,7 +186,11 @@ In the add-in, setup is light — most of this is verifying state, not manual me
 7. **Abstract must stand alone**: Abbreviations introduced in the abstract must be reintroduced in the main text.
 8. **Step 3**: Copy the final copyedited abstract from the manuscript into the metadata form. Retain a copy of the abstract in the manuscript file (mandatory for abstracts containing special formatting: italics, statistics, sub/superscript). Tip: You can paste structured abstract text into the unstructured field and toggle to "structured" — sections auto-sort if subheadings are correct.
 
-### Phase 5: Main Text & Language Editing
+**✓ Gate:** Word count ≤450 (reduced or queried if over); abstract type matches the article-type table; trial registration present + formatted (RCTs); no URLs except trial registration; abbreviations reintroduced in main text; "SMS text messaging" used.
+
+### Pass 4 — Language & Grammar
+
+> Statistics and numeric notation are **not** in this pass — they get their own focused sweep (Pass 5). Here, edit prose only.
 
 1. **Editing level**: Light to moderate. Correct grammar, spelling, run-on sentences, comma splices, awkward phrasing, superfluous/casual language. Do NOT perform heavy stylistic rewriting or move text around.
 2. **Tense** (see `house-style.md` §1):
@@ -172,7 +204,7 @@ In the add-in, setup is light — most of this is verifying state, not manual me
    - Expand at first mention if used ≥3 times in a stand-alone section.
    - Forbid author-invented and person-centered abbreviations.
    - Compile Abbreviations end section.
-6. **Statistics**: Apply all rules in `statistics.md`. Key checks:
+6. **Statistics** → **deferred to Pass 5.** Do not edit statistical notation here; a dedicated sweep catches it better. Kept in the list so you remember it is *not* this pass's job; the sub-checks below are handled fully in Pass 5:
    - No leading zero for P, α, β values. Leading zero for all others.
    - No spaces around equality/inequality signs.
    - P-value rounding: 2 decimals if P≥.01, 3 if P<.01.
@@ -186,9 +218,27 @@ In the add-in, setup is light — most of this is verifying state, not manual me
 13. **Blockquotes**: Format per `house-style.md` §10.
 14. **and/or**: Retain as is (policy updated December 2025).
 
-### Phase 6: Tables & Textboxes
+**✓ Gate:** Whole body read for prose only; tense/self-reference/first-person swept; US spelling; URLs converted; trademark symbols removed; software manufacturers present; all table/figure/MA callouts exist and are in order; abbreviation *usage* checked (the end-list is built in Pass 7).
 
-Apply all rules in `tables-and-figures.md`. Key checks:
+### Pass 5 — Statistics
+
+A single focused sweep for numeric and statistical notation — this is where the earlier "Statistics" item from the Language pass is actually done. Apply **all** rules in `statistics.md`. Sweep the whole document (body, tables, abstract copy) one notation type at a time.
+
+Key checks:
+1. **Leading zeros**: no leading zero for *P*, α, β values; leading zero for everything else (0.5, not .5).
+2. **Spacing**: no spaces around equality/inequality signs (P=.03, not P = .03).
+3. **P-value rounding**: 2 decimals if P≥.01, 3 decimals if P<.01; report P<.001 (never P=.000).
+4. **Eponyms**: no possessives (Cohen d, not Cohen's d; Student t test).
+5. **Statistical completeness** (raise as anchored comments where a value is missing): a mean needs an SD; a median needs an IQR/range; an OR/RR/HR needs a 95% CI; a test statistic needs df and P. See `statistics.md` for the full set (chi-square, t, F, CI, currency, complex equations).
+
+**✓ Gate:** Every P-value swept for leading zero + spacing + rounding; every effect estimate checked for its required dispersion/interval (missing ones queried); eponyms de-possessivized; Greek letters and equations formatted per `statistics.md`.
+
+### Pass 6 — Tables & Figures
+
+Apply all rules in `tables-and-figures.md`. Sweep each table, then each figure/MA, one at a time.
+
+**Tables & textboxes:**
+1. Correct nesting (bold category headers, subcategories in rows below).
 1. Correct nesting (bold category headers, subcategories in rows below).
 2. Cell formatting: `n (%)`, `mean (SD)`, `OR (95% CI)`.
 3. Footnotes: alphabetical superscripts (a, b, c), order of appearance (left→right, top→bottom), all end with periods, no asterisks.
@@ -201,9 +251,7 @@ Apply all rules in `tables-and-figures.md`. Key checks:
 10. 1-column tables → convert to 1×1 Word table (textbox). No drawing shapes.
 11. Textboxes: no footnotes. Remove reference citations from textbox captions (move to main text).
 
-### Phase 7: Figures & Multimedia Appendices (MAs)
-
-Apply all rules in `tables-and-figures.md`. Key checks:
+**Figures & multimedia appendices (MAs):**
 1. **Captions**: Sentence case, end with period, succinct. Define all abbreviations used in the figure at end of caption (alphabetical order). Do not include "Figure X" inside caption text field.
 2. **Language in figures**: Suggest corrections in Step 1 comments. Check for red error lines under words.
 3. **Figure references**: Any reference citations in figure or legend must be cited in text immediately after first mention (eg, "Figure 1 [29]").
@@ -218,7 +266,9 @@ Apply all rules in `tables-and-figures.md`. Key checks:
 8. **Peer-review reports**: Required as MAs for funded proposals and protocols.
 9. **Questionnaires**: Include as MAs unless copyright-protected.
 
-### Phase 8: End Sections
+**✓ Gate:** Every table swept for cell format, footnotes, empty-cell/percent/unit rules; every figure caption in sentence case with abbreviations defined; figure citations present in text; required checklist (CONSORT/PRISMA/iCHECK-DH) present for the article type or queried; TOC image present or queried.
+
+### Pass 7 — End Sections
 
 Verify the following sections appear **in this order** at the end of the manuscript:
 1. **Acknowledgments** (optional):
@@ -249,7 +299,9 @@ Verify the following sections appear **in this order** at the end of the manuscr
 6. **Conflicts of Interest** (mandatory) — If none: "None declared." Replace lengthy no-conflict sentences (eg, "The authors do not have any personal financial interests...") with simply "None declared." Cross-check against License to Publish (LTP) form and submission note.
 7. **Abbreviations** (mandatory) — H3 heading. List all abbreviations used in abstract or main text in alphabetical order. Sorting: punctuation → symbols → numerals → plain text (A-Z) → lowercase Greek letters. See `abbreviations.md` §2.1 for full sorting example.
 
-### Phase 9: References
+**✓ Gate:** All end sections present and in the correct order; Acknowledgments/Funding/COI/Contributions each checked against their rules; misplaced content (contributions, COI) moved to the right section; Abbreviations end-list built from every abbreviation used in abstract + body and correctly sorted.
+
+### Pass 8 — References
 
 Apply all rules in `references.md`. Key checks:
 1. Upload Word file with references and run RefCheck.
@@ -262,7 +314,34 @@ Apply all rules in `references.md`. Key checks:
 8. Verify JMIR/sister journal references have manuscript number in page field + Free Full Text link.
 9. Check all RefCheck URLs are functional.
 
-### Phase 10: Final Step 1 Actions
+**✓ Gate:** Every in-text citation resolves to a reference; duplicates removed; incomplete references queried; portal-only steps (RefCheck upload/run, classify-and-confirm) flagged as comments since they live outside Word.
+
+### Final Pass — Gap Sweep
+
+Now re-read the manuscript **once** against the audit checklist below. This is the in-add-in stand-in for a second reviewer: its only job is to catch what a focused pass missed.
+
+**Rules of the sweep:**
+- It may **only add** missed edits or queries. **Do not** re-open, undo, or re-edit changes already made in Passes 0–8 — that thrashes the document and reverses good work.
+- One sweep. If it surfaces a cluster of misses in one category (eg, several unspaced P-values slipped through), it is fine to re-run *that one pass*, but do not loop the whole thing indefinitely.
+- Anything you are unsure about becomes an anchored comment, not a silent change.
+
+**Audit checklist** (one line per pass — confirm each held):
+- [ ] **Mechanical**: spot-check 5–10 high-frequency rules (US spelling, "utilize"→"use", P-value form, trademark symbols) across sections you edited last — late edits often reintroduce misses.
+- [ ] **Structure/Title**: title case + ≤280 chars; headings levelled; IMRD intact.
+- [ ] **Metadata**: names/degrees/affiliations/ORCIDs/keywords all checked or flagged.
+- [ ] **Abstract**: ≤450 words; correct type; trial registration; no stray URLs.
+- [ ] **Language**: no first-person "I"; self-reference fixed; no residual heavy rewrites.
+- [ ] **Statistics**: leading zeros, spacing, rounding, eponyms; every estimate has its dispersion/interval or a query.
+- [ ] **Tables/Figures**: cell formats, footnotes, captions, required checklists.
+- [ ] **End Sections**: order correct; Abbreviations list complete and sorted.
+- [ ] **References**: all citations resolve; incompletes queried.
+- [ ] **Comments**: every judgment call the author must decide is an anchored comment, not buried in a tracked change; the blanket comment is present.
+
+**✓ Gate:** Every checklist line confirmed; all misses added as tracked changes/comments; nothing already-edited was reverted.
+
+### Closeout — Portal Actions (outside Word)
+
+Most of these live in OJS/Kriyadocs, not the document. Do the in-document part; flag the portal part as a comment for the human.
 
 1. Remove authorship information, affiliations, corresponding author, and keywords from the Word document (these are in OJS metadata).
 2. Review metadata form for correctness.

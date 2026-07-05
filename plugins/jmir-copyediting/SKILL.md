@@ -73,7 +73,7 @@ Mind the three context guards in `mechanical-rules.md` (URLs; "normal" in statis
 **The three rules of the pass method:**
 
 1. **One category, whole document, then stop.** In each pass you scan the entire manuscript for *only* that pass's concern. Do not fix a table while you are on the Statistics pass — note it if you must, but stay in your lane. Mixing concerns is what causes misses.
-2. **Every pass ends at its Completion Gate.** Each pass closes with a `✓ Gate:` line — a self-check you must be able to answer *yes* to before advancing. If you cannot, the pass is not done. The gate is the forcing function that makes a single agent exhaustive.
+2. **Every pass ends at its Completion Gate, and the gate demands evidence — not a "yes."** Each pass closes with a `✓ Gate:` line that tells you to **enumerate** what you found (eg, *list every P-value and its fix*), not merely assert you checked. This matters: a model can answer "yes, I checked" without having checked, but it cannot *produce the list* without actually sweeping. Write the enumeration out (in a scratch comment or your working notes) before advancing. An empty or suspiciously short list means the sweep was not done — go back. The list is the forcing function; the checkmark is not.
 3. **The Gap Sweep is mandatory, and it only adds.** After the last pass, the Final Pass re-reads the document against a compact audit checklist to catch what earlier passes missed. It may **add** missed edits/queries only — it must **never** revisit, re-open, or re-edit changes already made. One sweep; do not loop indefinitely.
 
 Run the passes **in order** (mechanical first, so deterministic edits are done before judgment work; gap sweep last). Layer 1 from the section above **is Pass 0**; Layer 2 is spread across Passes 1–8.
@@ -99,7 +99,7 @@ Run the **entire** deterministic layer before any judgment pass, so mechanical e
 
 Go rule-by-rule, not paragraph-by-paragraph: pick a rule, sweep the whole document for it, then the next rule. That ordering is what stops mechanical misses.
 
-**✓ Gate:** Have you passed all 139 rules over the full document — each rule swept end-to-end — with `auto` applied and `query` hits either confirmed or commented? If any rule was skipped, you are not done.
+**✓ Gate (enumerate):** State the count of rules swept (must be 139) and list every hit as `rule → location → auto-applied | queried`. If a rule produced zero hits, that is fine — but you must have *considered* all 139. A total-hit list that names no locations means you did not actually sweep; redo it.
 
 ### Pass 1 — Structure & Title
 
@@ -122,7 +122,7 @@ Go rule-by-rule, not paragraph-by-paragraph: pick a rule, sweep the whole docume
 8. **IMRD structure**: Verify Introduction → Methods → Results → Discussion for Original Papers. If the structure deviates, confirm it is justified per the article type.
 9. **Multipart papers**: If paper is "Part 2" or later, ensure previous parts are cited in the Introduction.
 
-**✓ Gate:** Title in title case and ≤280 chars; study-design phrasing correct for the article type; every heading swept for level + title case; IMRD confirmed or the deviation justified.
+**✓ Gate (enumerate):** State the title character count (must be ≤280) and the article type. **List every heading** in the document with its level and whether its case was already correct or you fixed it. State the IMRD verdict: present, or the specific justification for deviation. If you cannot list the headings, you did not sweep them.
 
 ### Pass 2 — Metadata
 
@@ -152,7 +152,7 @@ Go rule-by-rule, not paragraph-by-paragraph: pick a rule, sweep the whole docume
 7. **Keywords**: Separated by semicolons, sentence case, no trailing period/semicolon. Remove duplicate singular/plural forms; retain only one. Remove overly generic keywords. Recommend **5-12 keywords** including MeSH terms. If abbreviations are used as keywords, include expanded versions too. Use search variants (eg, "smartphone" AND "mobile phone" AND "mHealth").
 8. **License to Publish (LTP) form**: Verify all authors have signed. Cross-check COI reported in the LTP against the Conflicts of Interest section. For missing signatures or discrepancies, query authors in Step 1. If an author needs form assistance (resend, link expired), forward to `copyediting@jmir.org`. Outstanding issues in Step 3 → leave a Layout Note.
 
-**✓ Gate:** Every author checked for name format, degrees (low→high, no certs), and affiliation formatting; corresponding author complete; ORCIDs verified or queried; keywords formatted (5–12, semicolons, sentence case); LTP/COI cross-checked. Metadata-form items you can't see from Word are *flagged as comments*, not silently passed.
+**✓ Gate (enumerate):** **List every author** with their initials-format, degrees (as they'll appear), and an OK/fixed/queried mark for each. State the keyword count (target 5–12) and list them. Confirm the corresponding author's required fields one by one (email, address, phone). Metadata-form items you can't see from Word must appear in the list as *flagged-by-comment*, never silently passed.
 
 ### Pass 3 — Abstract
 
@@ -186,7 +186,7 @@ Go rule-by-rule, not paragraph-by-paragraph: pick a rule, sweep the whole docume
 7. **Abstract must stand alone**: Abbreviations introduced in the abstract must be reintroduced in the main text.
 8. **Step 3**: Copy the final copyedited abstract from the manuscript into the metadata form. Retain a copy of the abstract in the manuscript file (mandatory for abstracts containing special formatting: italics, statistics, sub/superscript). Tip: You can paste structured abstract text into the unstructured field and toggle to "structured" — sections auto-sort if subheadings are correct.
 
-**✓ Gate:** Word count ≤450 (reduced or queried if over); abstract type matches the article-type table; trial registration present + formatted (RCTs); no URLs except trial registration; abbreviations reintroduced in main text; "SMS text messaging" used.
+**✓ Gate (enumerate):** State the abstract word count (must be ≤450, else reduced/queried) and its type versus what the article-type table requires. **List every URL** found in the abstract and its disposition (removed, or the trial-registration exception). List every abbreviation introduced in the abstract and confirm each is reintroduced in the body. For RCTs, quote the Trial Registration line as formatted.
 
 ### Pass 4 — Language & Grammar
 
@@ -218,7 +218,7 @@ Go rule-by-rule, not paragraph-by-paragraph: pick a rule, sweep the whole docume
 13. **Blockquotes**: Format per `house-style.md` §10.
 14. **and/or**: Retain as is (policy updated December 2025).
 
-**✓ Gate:** Whole body read for prose only; tense/self-reference/first-person swept; US spelling; URLs converted; trademark symbols removed; software manufacturers present; all table/figure/MA callouts exist and are in order; abbreviation *usage* checked (the end-list is built in Pass 7).
+**✓ Gate (enumerate):** **List every** first-person "I"/"my" occurrence (must be zero after fixes), every self-reference fixed ("present study"→"this study"), every URL in the body and how you handled it, and every trademark symbol removed. List each software/device mention and confirm its manufacturer is present. List all table/figure/MA callouts in the order they appear and confirm the numbering is sequential. If any of these lists is empty, say *why* it's genuinely empty rather than skipped.
 
 ### Pass 5 — Statistics
 
@@ -231,7 +231,7 @@ Key checks:
 4. **Eponyms**: no possessives (Cohen d, not Cohen's d; Student t test).
 5. **Statistical completeness** (raise as anchored comments where a value is missing): a mean needs an SD; a median needs an IQR/range; an OR/RR/HR needs a 95% CI; a test statistic needs df and P. See `statistics.md` for the full set (chi-square, t, F, CI, currency, complex equations).
 
-**✓ Gate:** Every P-value swept for leading zero + spacing + rounding; every effect estimate checked for its required dispersion/interval (missing ones queried); eponyms de-possessivized; Greek letters and equations formatted per `statistics.md`.
+**✓ Gate (enumerate):** **List every P-value** in the manuscript with its before→after (leading zero, spacing, rounding). **List every effect estimate** (mean, median, OR/RR/HR, correlation, test statistic) and its required companion (SD, IQR, 95% CI, df) — mark each present or queried. List each eponym de-possessivized. A statistics-heavy paper with a short list means you missed values; go back.
 
 ### Pass 6 — Tables & Figures
 
@@ -266,7 +266,7 @@ Apply all rules in `tables-and-figures.md`. Sweep each table, then each figure/M
 8. **Peer-review reports**: Required as MAs for funded proposals and protocols.
 9. **Questionnaires**: Include as MAs unless copyright-protected.
 
-**✓ Gate:** Every table swept for cell format, footnotes, empty-cell/percent/unit rules; every figure caption in sentence case with abbreviations defined; figure citations present in text; required checklist (CONSORT/PRISMA/iCHECK-DH) present for the article type or queried; TOC image present or queried.
+**✓ Gate (enumerate):** **List every table** by number with its issues found/fixed (cell format, footnotes, empty-cell/percent/unit). **List every figure** by number confirming caption case, period, and abbreviations defined. State whether the article type requires a checklist (CONSORT/PRISMA/iCHECK-DH) and whether it's present or queried, and the same for the TOC image. Counts must match the callouts you listed in Pass 4.
 
 ### Pass 7 — End Sections
 
@@ -299,7 +299,7 @@ Verify the following sections appear **in this order** at the end of the manuscr
 6. **Conflicts of Interest** (mandatory) — If none: "None declared." Replace lengthy no-conflict sentences (eg, "The authors do not have any personal financial interests...") with simply "None declared." Cross-check against License to Publish (LTP) form and submission note.
 7. **Abbreviations** (mandatory) — H3 heading. List all abbreviations used in abstract or main text in alphabetical order. Sorting: punctuation → symbols → numerals → plain text (A-Z) → lowercase Greek letters. See `abbreviations.md` §2.1 for full sorting example.
 
-**✓ Gate:** All end sections present and in the correct order; Acknowledgments/Funding/COI/Contributions each checked against their rules; misplaced content (contributions, COI) moved to the right section; Abbreviations end-list built from every abbreviation used in abstract + body and correctly sorted.
+**✓ Gate (enumerate):** **List the end sections in the order they appear** and mark each against the required order; flag any missing mandatory section (Funding, COI, Abbreviations). List any content moved between sections (eg, contributions out of Acknowledgments). **List the full Abbreviations end-list** as sorted — every abbreviation used in abstract + body must appear, and the sort order must match the punctuation→symbols→numerals→A-Z→Greek rule.
 
 ### Pass 8 — References
 
@@ -314,7 +314,7 @@ Apply all rules in `references.md`. Key checks:
 8. Verify JMIR/sister journal references have manuscript number in page field + Free Full Text link.
 9. Check all RefCheck URLs are functional.
 
-**✓ Gate:** Every in-text citation resolves to a reference; duplicates removed; incomplete references queried; portal-only steps (RefCheck upload/run, classify-and-confirm) flagged as comments since they live outside Word.
+**✓ Gate (enumerate):** State the in-text citation count and the reference-list count. **List any in-text citation that does not resolve** to a reference (and vice versa), every duplicate found, and every incomplete reference queried. If all resolve cleanly, say so with the two counts. Portal-only steps (RefCheck upload/run, classify-and-confirm) must appear in the list as flagged-by-comment.
 
 ### Final Pass — Gap Sweep
 
@@ -337,7 +337,7 @@ Now re-read the manuscript **once** against the audit checklist below. This is t
 - [ ] **References**: all citations resolve; incompletes queried.
 - [ ] **Comments**: every judgment call the author must decide is an anchored comment, not buried in a tracked change; the blanket comment is present.
 
-**✓ Gate:** Every checklist line confirmed; all misses added as tracked changes/comments; nothing already-edited was reverted.
+**✓ Gate (enumerate):** **List every new miss** the sweep caught, by pass, with its fix — this is the sweep's whole output. If the list is empty, state that each checklist line was re-verified against the document (not from memory). Confirm explicitly that no already-made edit was reverted.
 
 ### Closeout — Portal Actions (outside Word)
 

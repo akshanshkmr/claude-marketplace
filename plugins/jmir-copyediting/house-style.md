@@ -13,9 +13,10 @@ Complete reference for language, spelling, punctuation, capitalization, numbers,
 - Non-native English speaker manuscripts may require more extensive attention.
 
 ### 1.2 Voice and Person
-- **Avoid passive voice** where possible — it should always be clear who the actors are.
-- **First person plural** ("we sampled...") is acceptable if not overused. Do not start every Methods sentence with "we" — switch to passive in that case.
-- **First person singular** ("I", "my") is **forbidden** in all sections, including opinion pieces and Discussion. Use: "It is the opinion of this author..." or similar neutral phrasing.
+> **Bulletin 9 (Jun 2026):** JMIR removed the long-standing restrictions against **passive voice** and **first-person pronouns** (they were not based on AMA or general convention). Do **not** convert passive→active or first-person→neutral as a style rule. Edit these only for genuine clarity, never for conformity.
+- **Passive voice**: acceptable. No longer flag or convert it on principle. (Prefer active only where the passive genuinely obscures who did what.)
+- **First person plural** ("we sampled...") is acceptable. Light touch if it becomes repetitive, but do not force it away.
+- **First person singular** ("I", "my"): acceptable, including in opinion pieces and Discussion. No longer forbidden — do not rewrite to "It is the opinion of this author."
 
 ### 1.3 Tense
 | Section | Tense | Example |
@@ -26,8 +27,8 @@ Complete reference for language, spelling, punctuation, capitalization, numbers,
 | Objective (completed research) | Past acceptable | "We aimed to determine..." / "The objective was to..." |
 
 ### 1.4 Self-Reference
-- Change "present study", "current study", "current paper" → **"this study"** or **"this paper"**.
-- Use **"paper"** or **"study"** rather than "article" to refer to the manuscript.
+> **Bulletin 9 (Jun 2026):** The restriction against the phrase "the current article" (and self-reference wording generally) was removed. Do **not** change "present study" / "current study" / "current paper" / "current article" → "this study." Leave the author's self-reference as written.
+- Self-referential wording ("present study", "current study", "current paper", "current article") is acceptable — no longer edited.
 
 ### 1.5 Spelling
 - **American English** always. Follow AMA Style Guide.
@@ -42,7 +43,7 @@ Complete reference for language, spelling, punctuation, capitalization, numbers,
 - As of December 2025: retain "and/or" as is. No longer required to rephrase.
 
 ### 1.8 Paper vs Article
-- Use "paper" (or "study") rather than "article" to refer to the manuscript.
+- "Paper" or "study" is preferred, but per Bulletin 9 (§1.4) self-reference is no longer policed — do not force-change "article" to "paper."
 
 ---
 
@@ -72,7 +73,7 @@ Use **headline style caps (title case)** for ALL titles and headings.
 | Hyphenated compounds | Capitalize both parts | `Population-Based Study`, `Drug-Resistant Bacteria`, `Self-Referral` |
 | Prefixed compounds in titles | Capitalize both parts | `Anti-Inflammatory Drugs`, `Cross-Sectional Study` |
 | Non-proper names starting with lowercase | Do NOT capitalize | `An mHealth Intervention for People With Dementia...` |
-| e- compounds in titles | Do NOT capitalize the e- | `e-Cigarettes and Future Battles...`, `e-Mental`, `e-Learning` |
+| e- compounds in titles | **Capitalize the E-** (Bulletin 9: the "e-" exception was removed to align with AMA) | `E-Cigarettes and Future Battles...`, `E-Mental Health`, `E-Learning` |
 | Intercapped trade names | Keep original casing | `eBay`, `iPhone` in titles and headings |
 | After lowercase Greek letter | Capitalize next word | `Systemic Adverse Effects of Ophthalmic β-Blockers` |
 | After numeral (not unit) | Capitalize next word | `High-Dose 308-nm Excimer Laser` |
@@ -123,7 +124,7 @@ Use **headline style caps (title case)** for ALL titles and headings.
   * *Preferred*: `A Robot for Autistic Children (Autobot): Randomized Controlled Trial`
 * **Geographic Locations**: Only include country or geographic names (eg, `...in Japan...`) in the title if essential to the findings or context (eg, low- and middle-income countries, or results heavily dependent on geography). Otherwise, move geography mentions to the abstract/Methods.
 * **Systematic Reviews**: Only use "Systematic Review" if the study strictly follows the PRISMA statement. App store searches or website assessments must NOT be called "Systematic Review" (use `Systematic Search on App Stores and Content Analysis` or similar instead).
-* **Revision Rule**: Make all title suggestions/changes during the initial Step 1 copyediting round. Directly edit the title in the Word document and the OJS/Kriyadocs metadata rather than proposing via comments. If authors refuse, pass information to the Production Editor via Layout Note.
+* **Revision Rule**: Make all title suggestions/changes during the initial Step 1 copyediting round. Directly edit the title in the Word document. **Bulletin 9 (Jun 2026) — metadata handling changed:** on **Kriyadocs**, copyeditors should **no longer edit author metadata** (including the title field); forward any needed change to the production team via a PQ. On **OJS**, record copyeditor metadata modifications in the layout notes for production review (and, as the transition rolls out, authors relay their own metadata changes to you as comments rather than editing the form). If authors refuse a title change, pass information to the Production Editor via Layout Note.
 
 ### 3.6 Document Heading Levels & Structure
 * **Platform heading levels**:
@@ -151,6 +152,12 @@ Use **headline style caps (title case)** for ALL titles and headings.
 * **Atypical Structures**:
   * Atypical structures (eg, blended `Methods and Results` or `Results and Discussion`) are allowed if logically warranted for all journals **except the main Journal of Medical Internet Research**.
   * Atypical structures must be approved by the Editorial Team (and will be noted in the submission notes/assignment email).
+
+### 3.7 Job Titles (New — Bulletin 9, Jun 2026)
+JMIR added guidance on capitalizing job titles. Follow AMA (the skill's fallback where JMIR text isn't quoted verbatim):
+- **Capitalize** a formal title only when it **immediately precedes** a personal name as part of the name: `Director Jane Smith`, `Professor Lee`.
+- **Lowercase** the title when it **follows** the name or **stands alone** in running text: `Jane Smith, director of the clinic`; `the professor`; `the principal investigator`.
+- Do not capitalize a title merely because the role is important. (If a specific manuscript quotes different JMIR wording via a "CE:" note, that wording wins.)
 
 ---
 
@@ -185,6 +192,7 @@ Use **headline style caps (title case)** for ALL titles and headings.
 - Use **numerals** for numbers in most circumstances (eg, "3 questionnaires").
 - Do NOT automatically spell out numbers less than 10 — consider context.
 - Do NOT spell out numbers in a quantitative results context.
+- **Bulletin 9 (Jun 2026):** numeral rules were streamlined to AMA. Numerals are generally preferred; the spelled-out cases in §7.2 still apply but are now at the **discretion of the author or copyeditor** in borderline cases — do not over-police a defensible choice.
 
 ### 7.2 When to Use Numerals vs Words
 
@@ -342,7 +350,7 @@ Use **headline style caps (title case)** for ALL titles and headings.
 
 ### Formatting
 - **Italicized and indented**, no quotation marks.
-- Speaker identified at end in **square brackets (not italic)**: `[Patient #24, male]`
+- Speaker/patient identifier at end in **square brackets (not italic)**: `[Patient #24, male]`. **Bulletin 9 (Jun 2026): identifiers are optional** — do not require or add them if the author omitted them.
 - Do NOT use bullet points for successive quotes.
 - Short singular quotes use **in-sentence quotation marks** instead.
 - If >⅓ of a page is quotes: suggest putting them in a textbox or table (columns: "Theme/category" and "Illustrative quote").

@@ -15,12 +15,13 @@ Complete reference for abbreviation usage, expansion rules, the Abbreviations en
 
 ## §2. General Rules for Abbreviation Usage
 
-### 2.1 The ≥3 Rule
-All abbreviations (with exceptions in §3) used **3 or more times** must be:
-1. Expanded at first mention within each **stand-alone section** of the paper.
-2. Format: `expanded name (abbreviation)` — eg, `mobile health (mHealth)`.
+### 2.1 The ≥3 Rule — now a recommendation (Bulletin 9, Jun 2026)
+> **Bulletin 9 change:** the ≥3 rule is now a **recommendation, not a requirement**. Copyeditors **may retain an abbreviation regardless of how often it occurs** if it aids readability or indexing. Do not mechanically expand-and-remove abbreviations used fewer than 3 times; use judgment. This also **eliminates the "well-known abbreviations" exception list** (§2.3) — there is no longer a separate carve-out, because any useful abbreviation may be kept.
 
-For abbreviations used **fewer than 3 times**: use the expanded form only (unless readability is hampered or the abbreviation is better known — see §2.2).
+Recommended default (apply with judgment, not rigidly):
+1. Abbreviations used **3 or more times** are expanded at first mention within each **stand-alone section**. Format: `expanded name (abbreviation)` — eg, `mobile health (mHealth)`.
+2. For abbreviations used **fewer than 3 times**: expanding-only is the default, **but you may retain the abbreviation** where it improves readability or is better known that way.
+3. Regardless of frequency, still **expand at first mention** in each stand-alone section (unless the term is on the §3 no-expansion list).
 
 ### 2.2 Stand-Alone Sections
 Each of the following is considered a separate, independent section — abbreviations must be re-introduced at first mention in each:
@@ -34,8 +35,10 @@ Each of the following is considered a separate, independent section — abbrevia
 
 **Example**: An abbreviation introduced in the abstract must be reintroduced in the main text using the `expanded form (abbreviation)` format.
 
-### 2.3 Well-Known Abbreviations Exception
-Abbreviations for **established terms or entities with lengthy names** that are or will be better known by their abbreviation are allowed regardless of how many times they occur. They should still be expanded at first mention in each stand-alone section. Examples:
+### 2.3 Well-Known Abbreviations (exception list retired — Bulletin 9)
+> **Bulletin 9 (Jun 2026):** this is **no longer a special "exception list."** Since §2.1 now lets you retain any abbreviation regardless of frequency, well-known abbreviations need no separate carve-out. The guidance below is kept only as **examples and formatting patterns**, not as a distinct rule.
+
+Abbreviations for **established terms or entities with lengthy names** that are or will be better known by their abbreviation are freely allowed regardless of how many times they occur. They should still be expanded at first mention in each stand-alone section. Examples:
 - Instruments or scales: `Diabetes Self-Management and Technology Questionnaire (DSMT-Q)`
 - Trial names
 - Organization names: `ACOG`, `WHO`, `VA`
@@ -117,7 +120,9 @@ The following can be used **without expansion anywhere in the paper** and do NOT
 
 | Abbreviation | Expansion / Notes |
 |-------------|-------------------|
+| AI | artificial intelligence — **no expansion needed (Bulletin 9, Jun 2026)** |
 | ANOVA | analysis of variance |
+| API | application programming interface — **no expansion needed (Bulletin 9, Jun 2026)** |
 | app | In context of mobile apps, "app" is simply "app" — it is NOT an acronym for "application" |
 | BMI | body mass index |
 | ChatGPT | Chat Generative Pre-Trained Transformer (applies to all product/software names resembling acronyms; eg, GPT-3.5) |
@@ -132,6 +137,7 @@ The following can be used **without expansion anywhere in the paper** and do NOT
 | IT | information technology |
 | JMIR | When used as brand name / publisher name — do NOT expand for sister journal titles ("JMIR mHealth and uHealth") or publisher ("JMIR Publications"). Expand to "Journal of Medical Internet Research" ONLY when referring to the specific journal at jmir.org (ISSN 1438-8871) |
 | LED | light-emitting diode |
+| MeSH | Medical Subject Headings — **no expansion needed (Bulletin 9, Jun 2026)** |
 | PC | personal computer |
 | PNG | portable network graphics (and other file format names) |
 | QR | Quick Response |
@@ -145,7 +151,7 @@ The following can be used **without expansion anywhere in the paper** and do NOT
 
 > **Important**: This is not an exhaustive list. Abbreviations for established terms with lengthy names that are/will be better known by their abbreviation are allowed and must be retained. If such abbreviations are used in the abstract or main text, compile them in the Abbreviations end section regardless of frequency.
 
-> **Title exception**: Retention of well-known acronyms (without expansion) in the title may be permitted to aid discoverability and indexing — email copyediting@jmir.org to confirm.
+> **Title exception (updated Bulletin 9, Jun 2026)**: Abbreviations are still generally discouraged in titles, but they **may be retained to improve readability or if useful for indexing** — this is now a copyeditor judgment call and no longer requires emailing copyediting@jmir.org to confirm.
 
 ---
 
@@ -163,7 +169,7 @@ The following can be used **without expansion anywhere in the paper** and do NOT
 
 ### 4.3 Subheadings
 - Abbreviations can be used if previously defined in text or on the no-expansion list (§3).
-- Avoid a **single abbreviation as a heading** — add a qualifier: `MRI Technique` or `PCR Analysis`, not just `MRI` or `PCR`.
+- **Bulletin 9 (Jun 2026):** the restriction against a **single abbreviation as a heading** has been **lifted**. A single abbreviation is now permissible as a subheading **as long as it was previously defined** — `MRI` or `PCR` alone is acceptable. Adding a qualifier (`MRI Technique`) is optional, no longer required.
 
 ### 4.4 Tables, Figures, Textboxes, and MAs
 - Abbreviations often necessary due to space constraints.

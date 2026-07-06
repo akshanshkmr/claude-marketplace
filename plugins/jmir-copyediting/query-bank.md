@@ -38,6 +38,8 @@ author to confirm*.
 
 ## 2. Authors — degrees & credentials
 
+> **Bulletin 9 (Jun 2026) — applies to every "…in the metadata form" query in §2 and §3.** Who edits the metadata changed. On **OJS**, as the transition rolls out authors no longer edit their own metadata — reword these to ask the author to **provide the information in a comment (or reply) so the copyeditor/production team can enter it**, rather than "in the metadata form." On **Kriyadocs**, the copyeditor does not edit author metadata at all — forward the change to production via a **PQ**. Keep the substance of each query; just change *who acts on it*.
+
 - Please provide the academic degree(s) for author [author initials] in the metadata form.
 - Please provide the academic degrees for all authors in the metadata form.
 - Authors' academic degrees have been added to the metadata from the doc file. Please confirm.
@@ -115,8 +117,8 @@ author to confirm*.
 
 - As per journal style the use of words such as utilize, utilization, employ, suffer, etc, are not allowed in this article and so I have changed them accordingly. Please check and confirm if they are okay. If you feel otherwise, then please suggest an alternative word instead.
 - JMIR prefers the use of term "paper" when referring to "manuscript." Therefore, I have changed "manuscript" to "paper" throughout the text.
-- JMIR prefers the use of term "paper" or "study" when referring to "article." Therefore, I have changed "article" to "paper" throughout. Please check and confirm if you prefer the other term.
-- As per journal guidelines, the use of "present"/"current" is not allowed to describe the study. Therefore, I have changed "the present study" to "this study." Please check and confirm.
+- ~~JMIR prefers "paper"/"study" when referring to "article"…~~ **Retired (Bulletin 9, Jun 2026): self-reference wording is no longer edited — do not send this query.**
+- ~~As per journal guidelines, the use of "present"/"current" is not allowed to describe the study…~~ **Retired (Bulletin 9, Jun 2026): "present study" / "current study" is now acceptable — do not send this query.**
 - As per journal guidelines, the term "elderly" is not used for describing old age people. Therefore, I have replaced it with the term "older people." Please check and confirm.
 - JMIR prefers the use of "Sex" for "male/female" and "Gender" for "men/women." Please make this change accordingly.
 - The journal style supports "people-first language" and so it would be great if you could change "ambulatory patients" to "people with…" which justifies the meaning that you are intending. Please make this change if it is possible.
@@ -150,6 +152,8 @@ author to confirm*.
 - As per journal requirements, please add the name of the manufacturer/supplier/developer for [product/software].
 
 ## 9. Abbreviations
+
+> **Bulletin 9 (Jun 2026) — read before using the queries below.** The ≥3-times rule is now a **recommendation, not a requirement**, and the "well-known abbreviations" exception list is retired. Several queries below are phrased as hard rules ("can only be used," "must," "not allowed," "only its abbreviated form is allowed") — **soften or skip them**: you may retain a useful abbreviation regardless of frequency, so only query when expansion genuinely aids readability. Also: a single abbreviation as a subheading is now allowed if previously defined; and AI, API, MeSH no longer need expansion.
 
 - As per journal guidelines, all abbreviations must be introduced at their first occurrence by providing the full term followed by the abbreviation in parentheses. Please check and confirm whether this has been done correctly.
 - As per the journal guidelines, abbreviations can only be used if they appear three or more times. Therefore, I have expanded this abbreviation. Please check and confirm whether it is correct.

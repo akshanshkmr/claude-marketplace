@@ -1,6 +1,6 @@
 # Mechanical Edits — Deterministic Layer (codeless)
 
-This is the **Layer 1** find/replace reference for the Claude for Word add-in, comprising all 139 rules ported from the skill's original terminal scanner. In that version a regex pass applied them; inside the add-in there is no Python runtime, so **you** are the regex: read the open document and apply each rule below, exhaustively, as you scan.
+This is the **Layer 1** find/replace reference for the Claude for Word add-in, comprising all 137 rules ported from the skill's original terminal scanner. In that version a regex pass applied them; inside the add-in there is no Python runtime, so **you** are the regex: read the open document and apply each rule below, exhaustively, as you scan.
 
 **Disposition map (how each rule lands in Word):**
 
@@ -95,7 +95,9 @@ Apply as tracked changes regardless of context.
 
 ---
 
-## 3. Word swaps — **query / context-dependent** (23 rules)
+## 3. Word swaps — **query / context-dependent** (21 rules)
+
+> **Bulletin 9 (Jun 2026):** the self-reference swaps `present/current study/paper/work/article → this study` and `article → paper/study` were **removed** — self-reference wording is no longer edited. (Count dropped from 23 to 21; total 139→137.)
 
 Usually correct, but confirm in context. Apply a tracked change only when the meaning is unambiguous; otherwise raise a comment (most have a matching entry in `query-bank.md`).
 
@@ -113,9 +115,7 @@ Usually correct, but confirm in context. Apply a tracked change only when the me
 | Moreover, | Furthermore, / In addition, | |
 | as a result | thus | |
 | , though | , however | Trailing connector |
-| (the) present/current study/paper/work/article | this study / this paper | |
 | manuscript / manuscripts | paper | **Keep in Acknowledgments** (guard #3) |
-| article / articles | paper / study | When referring to *this* work |
 | moderate to severe | vigorous | Exercise-intensity context only |
 | relatives | caregivers | If that is the intended meaning |
 | medical professional(s) | health care professional(s) | Consistency |

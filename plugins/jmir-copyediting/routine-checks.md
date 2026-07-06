@@ -94,9 +94,9 @@ title case on headings (see `house-style.md` §3); IMRD present and justified fo
 | further, / additionally, / moreover, (connectors) | furthermore, / in addition, | ctx |
 | as a result | thus | ctx |
 | though (trailing) | however | ctx |
-| present study / current study | this study / this paper | ctx |
+| ~~present study / current study~~ | — | **removed (Bulletin 9): self-reference no longer edited** |
 | manuscript | paper | ctx (**keep in Acknowledgments**) |
-| article (= this work) | paper / study | ctx |
+| ~~article (= this work)~~ | — | **removed (Bulletin 9): self-reference no longer edited** |
 | medical professional; health professional | health care professional(s) | ctx |
 | relatives | caregivers | ctx + query |
 | prior (= earlier) | previous | ctx |
@@ -114,7 +114,7 @@ title case on headings (see `house-style.md` §3); IMRD present and justified fo
 - **eHealth, mHealth, eSource** (never e-health, e-Health, m-health, m-Health, e-source). Same camelCase for other *x*Health neologisms. `auto`
 - **SMS by location**: titles/headings → "text messaging" / "texting"; abstract → "SMS text messaging"; body → "SMS text messaging" (first) then "texting"/"SMS text messaging". `ctx`
 - Dimensional terms with numerals → numeral + D: "three-dimensional" → "3D", "four-dimensional" → "4D". `ctx`
-- Abbreviations: expand at first use **only if used ≥3 times**; otherwise spell out. No author-invented or one-word abbreviations. Full rules and the no-expansion list → `abbreviations.md`.
+- Abbreviations: the ≥3-times rule is now a **recommendation, not a requirement** (Bulletin 9) — retain a useful abbreviation regardless of frequency; still expand at first use. No author-invented abbreviations. A single abbreviation as a subheading is now allowed if previously defined. AI, API, MeSH need no expansion. Full rules and the no-expansion list → `abbreviations.md`.
 
 ## 5. Punctuation, hyphenation & symbols
 

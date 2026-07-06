@@ -24,7 +24,7 @@ Read the **Runtime** section next — it defines how the two layers below are ap
 | `statistics.md` | P-values, leading zeros, spacing, eponyms, effect sizes, chi-square, t test, F test, CI, OR, IQR, Greek letters, currency, complex equations |
 | `tables-and-figures.md` | Table formatting, nesting, footnotes, textboxes, figure captions, permitted/prohibited figures, TOC image, multimedia appendices, CONSORT/PRISMA checklists |
 | `references.md` | In-text citations, reference list formatting, RefCheck, DOI/PMID, adding/deleting/reordering references, preprints, retractions, author names in text |
-| `mechanical-rules.md` | **The deterministic layer, codeless.** All 139 find/replace rules (spelling, word swaps, statistics, phrase flags, hyphenation), each tagged `auto` (→ tracked change) or `query` (→ anchored comment), plus the three context guards. This is the in-add-in replacement for the old Python scanner. |
+| `mechanical-rules.md` | **The deterministic layer, codeless.** All 137 find/replace rules (spelling, word swaps, statistics, phrase flags, hyphenation), each tagged `auto` (→ tracked change) or `query` (→ anchored comment), plus the three context guards. This is the in-add-in replacement for the old Python scanner. |
 
 ---
 
@@ -51,7 +51,7 @@ This skill runs **inside the open Word document**, not a terminal. There is no P
 
 Every JMIR copyedit is two kinds of work. Do **both**, in this order, so nothing slips.
 
-**Layer 1 — Deterministic.** A fixed list of 139 routine mechanical edits (US spelling, utilization to use, P=0.03 to P=.03, eponyms, trademark-symbol removal, noon/midnight, and the rest). In the terminal version a regex pass applied these; in the add-in **you are the regex** — read `mechanical-rules.md` and scan the document against every rule so none is missed. Each rule is tagged:
+**Layer 1 — Deterministic.** A fixed list of 137 routine mechanical edits (US spelling, utilization to use, P=0.03 to P=.03, eponyms, trademark-symbol removal, noon/midnight, and the rest). In the terminal version a regex pass applied these; in the add-in **you are the regex** — read `mechanical-rules.md` and scan the document against every rule so none is missed. Each rule is tagged:
 
 - `auto` — safe regardless of context. Apply each as a **tracked change**.
 - `query` — correct most of the time but context-dependent (subjects to participants, manuscript to paper, "normal" health status, currency, URLs). Apply a tracked change **only** when context clearly confirms it; otherwise raise an **anchored comment**. Most map to a query in `query-bank.md`.
@@ -68,7 +68,7 @@ Mind the three context guards in `mechanical-rules.md` (URLs; "normal" in statis
 
 ## Step 1: Initial Copyedit — The Pass Method
 
-> **Why passes.** A JMIR manuscript is too much to hold at once. Reading it top-to-bottom while trying to apply 139 mechanical rules *and* every judgment call at the same time is exactly how edits get missed — attention splits and something slips. So you do **not** read once. You make one **focused pass per category**, each over the *whole* document, and you **finish and verify** each pass before starting the next.
+> **Why passes.** A JMIR manuscript is too much to hold at once. Reading it top-to-bottom while trying to apply 137 mechanical rules *and* every judgment call at the same time is exactly how edits get missed — attention splits and something slips. So you do **not** read once. You make one **focused pass per category**, each over the *whole* document, and you **finish and verify** each pass before starting the next.
 
 **The three rules of the pass method:**
 
@@ -91,7 +91,7 @@ In the add-in, setup is light — most of this is verifying state, not manual me
 
 ### Pass 0 — Mechanical Scan (deterministic; do this first)
 
-Run the **entire** deterministic layer before any judgment pass, so mechanical edits never compete with judgment for attention. Open `mechanical-rules.md` and scan the whole document against **every one** of the 139 rules — you are the regex.
+Run the **entire** deterministic layer before any judgment pass, so mechanical edits never compete with judgment for attention. Open `mechanical-rules.md` and scan the whole document against **every one** of the 137 rules — you are the regex.
 
 - `auto` rules → apply each as a **tracked change** wherever it matches.
 - `query` rules → tracked change **only** when context clearly confirms it; otherwise an **anchored comment** (most map to `query-bank.md`).
@@ -99,7 +99,7 @@ Run the **entire** deterministic layer before any judgment pass, so mechanical e
 
 Go rule-by-rule, not paragraph-by-paragraph: pick a rule, sweep the whole document for it, then the next rule. That ordering is what stops mechanical misses.
 
-**✓ Gate (enumerate):** State the count of rules swept (must be 139) and list every hit as `rule → location → auto-applied | queried`. If a rule produced zero hits, that is fine — but you must have *considered* all 139. A total-hit list that names no locations means you did not actually sweep; redo it.
+**✓ Gate (enumerate):** State the count of rules swept (must be 137) and list every hit as `rule → location → auto-applied | queried`. If a rule produced zero hits, that is fine — but you must have *considered* all 137. A total-hit list that names no locations means you did not actually sweep; redo it.
 
 ### Pass 1 — Structure & Title
 
@@ -125,6 +125,11 @@ Go rule-by-rule, not paragraph-by-paragraph: pick a rule, sweep the whole docume
 **✓ Gate (enumerate):** State the title character count (must be ≤280) and the article type. **List every heading** in the document with its level and whether its case was already correct or you fixed it. State the IMRD verdict: present, or the specific justification for deviation. If you cannot list the headings, you did not sweep them.
 
 ### Pass 2 — Metadata
+
+> **Bulletin 9 (Jun 2026) — who edits metadata changed.** You still *check* metadata against the document, but how corrections are handled has changed:
+> - **Kriyadocs**: do **not** edit author metadata yourself. Raise a PQ forwarding the needed change to the production team.
+> - **OJS**: record any copyeditor metadata modification in the **layout notes** for production review. As the transition rolls out, authors no longer edit their own metadata either — guide them (via comment) to relay metadata changes to you rather than editing the form.
+> - In the add-in you can only *flag* metadata issues as comments regardless (the form isn't visible from Word) — this change reinforces that: flag, don't assume the author will self-edit.
 
 1. **Author names**: Check spelling, capitalization against OJS metadata. Use initials format: Bryan George Miller → BGM (not BM). Full first name required (unless author objects). No periods after initials, no space between multiple initials. For hyphenated given names: Ka-Wai Tam → KWT (no hyphen in initials). See `references.md` for author name formatting in body text.
 2. **Author degrees**:
@@ -157,7 +162,7 @@ Go rule-by-rule, not paragraph-by-paragraph: pick a rule, sweep the whole docume
 ### Pass 3 — Abstract
 
 1. **Word count**: Both structured and unstructured abstracts must not exceed **450 words**.
-   - If abstract exceeds limit by ≤50 words: attempt to reduce (eg, remove wordy constructs, redundant expressions, circumlocutions, convert passive to active voice).
+   - If abstract exceeds limit by ≤50 words: attempt to reduce (eg, remove wordy constructs, redundant expressions, circumlocutions). *(Do not convert passive→active as a reduction tactic — passive voice is no longer restricted per Bulletin 9.)*
    - If abstract exceeds limit by >50 words: query the author to reduce further.
    - Template: `"As per the journal guidelines, the abstract for [article type] should not exceed the limit of 450 words. I have made some revisions and suggestions to this effect. Please confirm that all essential information has been retained [and reduce the length of the abstract further to adhere to the above-mentioned word limit]."`
 2. **Structure**: Verify headings match article type:
@@ -196,12 +201,13 @@ Go rule-by-rule, not paragraph-by-paragraph: pick a rule, sweep the whole docume
 2. **Tense** (see `house-style.md` §1):
    - Methods: past tense ("was conducted"). Exception: Protocols/Proposals use future ("will be enrolled") or present ("is currently recruiting").
    - Objective: present preferred if study is subject ("This paper explores..."); past acceptable when reporting completed research ("We aimed to...").
-3. **Self-reference**: Change "present study", "current study", "current paper" → "**this study**" or "**this paper**". Use "paper" or "study" rather than "article".
-4. **First person**:
-   - Plural "we" is acceptable if not overused (avoid starting every Methods sentence with "we").
-   - Singular "I"/"my" is **forbidden** in all sections including opinion pieces. Use "It is the opinion of this author..." or similar.
+3. **Self-reference** *(Bulletin 9: no longer edited)*: Do NOT change "present study" / "current study" / "current paper" / "current article" to "this study." Self-reference wording is left as the author wrote it.
+4. **First person** *(Bulletin 9: restrictions removed)*:
+   - Plural "we" is acceptable. Light touch only if genuinely repetitive; do not force it away.
+   - Singular "I"/"my" is **no longer forbidden** — acceptable in all sections including opinion pieces. Do not rewrite to "It is the opinion of this author."
+    - Passive voice is likewise **not** flagged or converted on principle.
 5. **Abbreviations**: Apply all rules in `abbreviations.md`. Key rules:
-   - Expand at first mention if used ≥3 times in a stand-alone section.
+   - The ≥3-times expand rule is now a **recommendation, not a requirement** (Bulletin 9); retain a useful abbreviation regardless of frequency and use judgment rather than mechanically expanding low-frequency ones.
    - Forbid author-invented and person-centered abbreviations.
    - Compile Abbreviations end section.
 6. **Statistics** → **deferred to Pass 5.** Do not edit statistical notation here; a dedicated sweep catches it better. Kept in the list so you remember it is *not* this pass's job; the sub-checks below are handled fully in Pass 5:
@@ -218,7 +224,7 @@ Go rule-by-rule, not paragraph-by-paragraph: pick a rule, sweep the whole docume
 13. **Blockquotes**: Format per `house-style.md` §10.
 14. **and/or**: Retain as is (policy updated December 2025).
 
-**✓ Gate (enumerate):** **List every** first-person "I"/"my" occurrence (must be zero after fixes), every self-reference fixed ("present study"→"this study"), every URL in the body and how you handled it, and every trademark symbol removed. List each software/device mention and confirm its manufacturer is present. List all table/figure/MA callouts in the order they appear and confirm the numbering is sequential. If any of these lists is empty, say *why* it's genuinely empty rather than skipped.
+**✓ Gate (enumerate):** **List every** URL in the body and how you handled it, and every trademark symbol removed. List each software/device mention and confirm its manufacturer is present. List all table/figure/MA callouts in the order they appear and confirm the numbering is sequential. (Per Bulletin 9, do **not** flag first-person pronouns, passive voice, or self-reference wording — those are no longer edited.) If any of these lists is empty, say *why* it's genuinely empty rather than skipped.
 
 ### Pass 5 — Statistics
 
@@ -482,10 +488,10 @@ Contact copyediting@jmir.org **before** suggesting major content revisions. Esca
 
 ### 1. Performance & Quality Benchmarks
 Contractual copyeditors are expected to meet and maintain the following monthly averages:
-* **Author Satisfaction (Survey Score)**: **&ge;4.6 / 5.0** (Scale: 1 = not satisfied, 5 = very satisfied). Reviewed before starting Step 3.
+* **Author Satisfaction (Survey Score)**: ~~&ge;4.6 / 5.0~~ **Discontinued (Bulletin 9, Jun 2026)** — the Copyediting Step 2 Survey (Step 2e) has been officially discontinued and is no longer a benchmark.
 * **Turnaround Time (TAT)**: **&le;7 calendar days** total per manuscript (typically **5 days for Step 1** and **2 days for Step 3**).
   * *Prompt start*: Copyediting should begin within **1 calendar day** of assignment.
-  * *Prioritization*: Fast-tracked manuscripts (highlighted with a blue background on the dashboard) must be prioritized.
+  * *Prioritization*: Fast-tracked manuscripts (highlighted with a blue background on the dashboard) must be prioritized. *(Note: the performance dashboard is temporarily disabled per Bulletin 9 pending the survey change; fast-track flagging may be communicated another way in the interim.)*
 * **Quality Control (QC) Check Score**: **&ge;3 / 4** on the following scale:
   * `4` = Very Good (Publication-ready; minimal/negligible formatting or style issues).
   * `3` = Good (Nearly publication-ready; few minor issues requiring minimal final effort).
